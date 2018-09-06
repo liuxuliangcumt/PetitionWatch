@@ -1,0 +1,78 @@
+package com.realpower.petitionwatch.util;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.realpower.petitionwatch.R;
+
+/**
+ */
+public class DataGenerator {
+
+    public static final int[] mTabRes = new int[]{R.drawable.main_petition_d, R.drawable.main_list_d, R.drawable.bai, R.drawable.main_alarm_d, R.drawable.main_me_d};
+    public static final int[] mTabResPressed = new int[]{R.drawable.main_petition_c, R.drawable.main_list_c, R.drawable.bai, R.drawable.main_alarm_c, R.drawable.main_me_c};
+    public static final String[] mTabTitle = new String[]{"消息", "通讯录", "", "报警", "我的"};
+
+    // 6 21 修改之前
+    /*  public static final int[] mStaffTabRes = new int[]{R.drawable.main_petition_d, R.drawable.main_suggest_d, R.drawable.main_key_d, R.drawable.main_me_d};
+      public static final String[] mStaffTabTitle = new String[]{"诉求", "意见", "重点人", "我的"};
+      public static final int[] mStaffTabResPressed = new int[]{R.drawable.main_petition_c, R.drawable.main_suggest_c, R.drawable.main_key_c, R.drawable.main_me_c};
+  */
+    public static final int[] mStaffTabRes = new int[]{R.drawable.main_petition_d, R.drawable.main_list_d, R.drawable.bai, R.drawable.main_key_d, R.drawable.main_me_d};
+    public static final int[] mStaffTabResPressed = new int[]{R.drawable.main_petition_c, R.drawable.main_list_c, R.drawable.bai, R.drawable.main_key_c, R.drawable.main_me_c};
+    public static final String[] mStaffTabTitle = new String[]{"消息", "通讯录", "", "重点人", "我的"};
+
+    public static final String[] mCountTabTitle = new String[]{"消息", "通讯录", "", "告警信息", "监控任务"};
+    public static final int[] mCountTabResPressed = new int[]{R.drawable.main_petition_c, R.drawable.main_list_c, R.drawable.bai, R.drawable.main_alarm_c ,R.drawable.county_main_task_c};
+    public static final int[] mCountTabRes = new int[]{R.drawable.main_petition_d, R.drawable.main_list_d, R.drawable.bai,  R.drawable.main_alarm_d,R.drawable.county_main_task_d};
+
+    public static final String[] mCityTabTitle = new String[]{"消息", "通讯录", "", "告警信息", "我的"};
+    public static final int[] mCityTabResPressed = new int[]{R.drawable.main_petition_c, R.drawable.main_list_c, R.drawable.bai, R.drawable.main_alarm_c, R.drawable.main_me_c};
+    public static final int[] mCityTabRes = new int[]{R.drawable.main_petition_d, R.drawable.main_list_d, R.drawable.bai, R.drawable.main_alarm_d, R.drawable.main_me_d};
+
+    /**
+     * 获取Tab 显示的内容
+     *
+     * @param context
+     * @param position
+     * @return
+     */
+    public static View getTabView(Context context, int position) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
+        ImageView tabIcon = (ImageView) view.findViewById(R.id.tab_content_image);
+        tabIcon.setImageResource(DataGenerator.mTabRes[position]);
+        TextView tabText = (TextView) view.findViewById(R.id.tab_content_text);
+        tabText.setText(mTabTitle[position]);
+        return view;
+    }
+
+    public static View getStaffTabView(Context context, int position) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
+        ImageView tabIcon = (ImageView) view.findViewById(R.id.tab_content_image);
+        tabIcon.setImageResource(DataGenerator.mStaffTabRes[position]);
+        TextView tabText = (TextView) view.findViewById(R.id.tab_content_text);
+        tabText.setText(mStaffTabTitle[position]);
+        return view;
+    }
+
+    public static View getCountyTabView(Context context, int position) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
+        ImageView tabIcon = (ImageView) view.findViewById(R.id.tab_content_image);
+        TextView tabText = (TextView) view.findViewById(R.id.tab_content_text);
+        tabIcon.setImageResource(DataGenerator.mCountTabRes[position]);
+        tabText.setText(mCountTabTitle[position]);
+        return view;
+    }
+
+    public static View getCityTabView(Context context, int position) {
+        View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
+        ImageView tabIcon = (ImageView) view.findViewById(R.id.tab_content_image);
+        TextView tabText = (TextView) view.findViewById(R.id.tab_content_text);
+        tabIcon.setImageResource(DataGenerator.mCityTabRes[position]);
+        tabText.setText(mCityTabTitle[position]);
+        return view;
+    }
+}

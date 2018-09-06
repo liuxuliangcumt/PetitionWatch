@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/fragmenttitle_common" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/spinner"
+        android:layout_width="196dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="13dp"
+        android:background="@drawable/bg_spinner"
+        android:gravity="center"
+        android:spinnerMode="dropdown"
+        android:visibility="gone"></android.support.v7.widget.AppCompatSpinner>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/ccbcbcb" />
+
+    <ListView
+        android:id="@+id/lv_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+</LinearLayout>

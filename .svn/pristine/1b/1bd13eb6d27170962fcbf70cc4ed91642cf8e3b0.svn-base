@@ -1,0 +1,274 @@
+package com.realpower.petitionwatch.modelcity.activity;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.codbking.widget.DatePickDialog;
+import com.codbking.widget.OnSureLisener;
+import com.codbking.widget.bean.DateType;
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.modelcity.adapter.AddTaskAdapter;
+import com.realpower.petitionwatch.modelcity.bean.DistrictBean;
+import com.realpower.petitionwatch.net.MyCallback;
+import com.realpower.petitionwatch.net.param.AddTaskParam;
+import com.realpower.petitionwatch.net.param.PagingParam;
+import com.realpower.petitionwatch.net.result.DistrictResult;
+import com.realpower.petitionwatch.net.result.StringResult;
+import com.realpower.petitionwatch.util.MyToastUtils;
+import com.realpower.petitionwatch.util.SystemInfoUtils;
+import com.realpower.petitionwatch.view.ClearEditText;
+import com.realpower.petitionwatch.view.CustomDialog;
+
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+
+@EActivity
+public class CityAddTaskActivity extends BaseActivity {
+    @ViewById
+    ClearEditText et_title, et_description;
+    @ViewById
+    TextView tv_timeStart, tv_timeEnd, tv_person;
+    private AddTaskParam param;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_city_add_task);
+        setTitleName("新建任务");
+        param = new AddTaskParam();
+    }
+
+    private List<DistrictBean.ListBean> data;
+
+    @Click({R.id.btn_ok, R.id.ll_person, R.id.ll_timeEnd, R.id.ll_timeStart})
+    void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_ok:
+                beforAddTask();
+                break;
+            case R.id.ll_person:
+                if (data == null) {
+                    getPerson();
+                } else {
+                    showPersonDailog();
+                }
+                break;
+            case R.id.ll_timeEnd:
+                showTimeDailog(true);
+                break;
+            case R.id.ll_timeStart:
+                showTimeDailog(false);
+                break;
+        }
+    }
+
+    String startTime = "", endTime = "", districtId = "";
+
+    private void beforAddTask() {
+        String title = et_title.getText().toString().trim();
+        String content = et_description.getText().toString().trim();
+        if (title.length() == 0) {
+            MyToastUtils.showToast("请输入任务标题");
+            return;
+        } else {
+            param.setTitle(title);
+        }
+        if (content.length() == 0) {
+            MyToastUtils.showToast("请输入任务描述");
+            return;
+        } else {
+            param.setInfo(content);
+        }
+        if (startTime.length() == 0) {
+            MyToastUtils.showToast("请选择开始时间");
+            return;
+        } else {
+            param.setStarttime(startTime);
+        }
+        if (endTime.length() == 0) {
+            MyToastUtils.showToast("请选择结束时间");
+            return;
+        } else {
+            param.setEndtime(endTime);
+        }
+        if (districtId.length() == 0) {
+            MyToastUtils.showToast("请选择执行人");
+            return;
+        } else {
+            param.setDistrictId(districtId);
+        }
+        showMyDialog("请稍后");
+        addTask();
+
+    }
+
+    private void addTask() {
+        Call<StringResult> call = apiService.cityAddTask(param);
+        call.enqueue(new MyCallback<StringResult>() {
+            @Override
+            public void onSuccessRequest(StringResult result) {
+                if ("1".equals(result.getStatus())) {
+                    MyToastUtils.showToast("");
+                    finish();
+                }
+            }
+
+            @Override
+            public void afterRequest() {
+                hideDialog();
+            }
+
+            @Override
+            public void onFailureRequest(Call<StringResult> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void showTimeDailog(final boolean isEnd) {
+        //from  区分来之哪个地方选择时间
+        DatePickDialog dialog = new DatePickDialog(this);
+        //设置上下年分限制
+        dialog.setYearLimt(5);
+        //设置标题
+        dialog.setTitle("选择时间");
+        //设置类型
+        dialog.setType(DateType.TYPE_ALL);
+        //设置消息体的显示格式，日期格式
+        dialog.setMessageFormat("yyyy-MM-dd HH:mm:SS");
+        //设置选择回调
+        dialog.setOnChangeLisener(null);
+        //设置点击确定按钮回调
+        dialog.setOnSureLisener(new OnSureLisener() {
+            @Override
+            public void onSure(Date date) {
+                String format = "yyyy-MM-dd HH:mm:SS";
+                String messge = "";
+                try {
+                    messge = new SimpleDateFormat(format).format(date);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (isEnd) {
+                    if (param.getStarttimeDate() != null) {
+                        if (param.getStarttimeDate().before(date)) {
+                            endTime = messge;
+                            tv_timeEnd.setText(messge);
+                            param.setEndtimeDate(date);
+                        } else {
+                            MyToastUtils.showToast("结束日期不能大于开始日期");
+                            showTimeDailog(isEnd);
+                        }
+
+                    } else {
+                        endTime = messge;
+                        tv_timeEnd.setText(messge);
+                        param.setEndtimeDate(date);
+                    }
+                } else {
+                    if (param.getEndtimeDate() != null) {
+                        if (param.getEndtimeDate().after(date)) {
+                            tv_timeStart.setText(messge);
+                            param.setStarttimeDate(date);
+                            startTime = messge;
+                        } else {
+                            MyToastUtils.showToast("结束日期不能大于开始日期");
+                            showTimeDailog(isEnd);
+                        }
+                    } else {
+                        tv_timeStart.setText(messge);
+                        param.setStarttimeDate(date);
+                        startTime = messge;
+                    }
+                }
+
+            }
+        });
+        dialog.show();
+    }
+
+    private void getPerson() {
+        Call<DistrictResult> call = apiService.districtSelectAll(new PagingParam("1"));
+        call.enqueue(new MyCallback<DistrictResult>() {
+            @Override
+            public void onSuccessRequest(DistrictResult result) {
+                if ("1".equals(result.getStatus())) {
+                    data = new ArrayList<>();
+                    data.addAll(result.getMessage().getList());
+                    showPersonDailog();
+                }
+            }
+
+            @Override
+            public void afterRequest() {
+
+            }
+
+            @Override
+            public void onFailureRequest(Call<DistrictResult> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void showPersonDailog() {
+        districtId = "";
+        tv_person.setText("");
+        for (int i = 0; i < data.size(); i++) {
+            data.get(i).setChoose(false);
+        }
+        final CustomDialog dialog = new CustomDialog(this, R.style.customDialog, R.layout.dialog_add_task);
+        dialog.show();
+        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        layoutParams.width = (int) (SystemInfoUtils.getWindowsWidth(this) * 0.9);
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(layoutParams);
+        ListView lv_person = (ListView) dialog.getCustomView().findViewById(R.id.lv_person);
+        final AddTaskAdapter adapter = new AddTaskAdapter(this, data);
+        lv_person.setAdapter(adapter);
+        lv_person.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                boolean beforClick = data.get(position).isChoose();
+                for (int i = 0; i < data.size(); i++) {
+                    data.get(i).setChoose(false);
+                }
+                data.get(position).setChoose(!beforClick);
+                adapter.notifyDataSetChanged();
+
+                Log.e("aaa", "   item点击了  " + position + "   " + data.get(position).isChoose());
+            }
+        });
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(i).isChoose()) {
+                        districtId = data.get(i).getDistrictId() + "";
+                        tv_person.setText(data.get(i).getDistrictRealname());
+                    }
+                }
+            }
+        });
+
+    }
+}

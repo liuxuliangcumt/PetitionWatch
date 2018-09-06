@@ -1,0 +1,210 @@
+package com.realpower.petitionwatch.modelcounty.fragment;
+
+import android.graphics.Color;
+import android.text.Html;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.fragment.BaseFragment;
+import com.realpower.petitionwatch.modelcounty.bean.HomeTopBean;
+import com.realpower.petitionwatch.modelcounty.bean.OnlineBean;
+import com.realpower.petitionwatch.modelcounty.bean.SixMonthMonitoredBean;
+import com.realpower.petitionwatch.net.MyCallback;
+import com.realpower.petitionwatch.net.result.HomeTopResult;
+import com.realpower.petitionwatch.net.result.OnlineResult;
+import com.realpower.petitionwatch.net.result.SixMonthMonitoredResult;
+import com.realpower.petitionwatch.net.result.StringResult;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+
+/**
+ */
+@EFragment(R.layout.fragment_home)
+public class HomeFragment extends BaseFragment {
+    @ViewById
+    TextView tv_monitor, tv_monitorEnd, tv_monitored, tv_monitoredEnd;
+    @ViewById
+    TextView tv_value1, tv_value2, tv_value3, tv_name1, tv_name2, tv_name3;
+    @ViewById
+    BarChart barChart;
+    private String text = "546";
+    @ViewById
+    ProgressBar pb_monitor, pb_monitored;
+
+    @AfterViews
+    void onInitViews() {
+        setTitleName("首页");//#323232
+
+        getCategoryTopThree();
+        getSixMonthMonitored();
+        getCurrentData();
+        pb_monitor.setProgress(20);
+    }
+
+    private void getCurrentData() {
+        Call<OnlineResult> call = apiService.getCurrentData();
+        call.enqueue(new MyCallback<OnlineResult>() {
+            @Override
+            public void onSuccessRequest(OnlineResult result) {
+                if ("1".equals(result.getStatus())) {
+                    setCurrentOnlineData(result.getMessage());
+                }
+            }
+
+            @Override
+            public void afterRequest() {
+
+            }
+
+            @Override
+            public void onFailureRequest(Call<OnlineResult> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void setCurrentOnlineData(OnlineBean message) {
+        String monitored = "<span style=\"color: #323232\"; \"font-size: 16px\";>重点人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style=\"color: #999\">" +
+                message.getTotalMonitorednum() + "</span><span>人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
+        String monitoredEnd = "<span>在线</span><span style=\"color: #999\">" + message.getMonitorednum() + "</span><span>人</span>";
+        tv_monitored.setText(Html.fromHtml(monitored));
+        tv_monitoredEnd.setText(Html.fromHtml(monitoredEnd));
+        String monitor = "<span style=\"color: #323232\"; \"font-size: 16px\";>工作人员&nbsp;&nbsp;&nbsp;&nbsp;</span><span style=\"color: #999\">" +
+                message.getTotalSupernum() + "</span><span>人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
+        String monitorEnd = "<span>在线</span><span style=\"color: #999\">" + message.getSupernum() + "</span><span>人</span>";
+        tv_monitor.setText(Html.fromHtml(monitor));
+        tv_monitorEnd.setText(Html.fromHtml(monitorEnd));
+        pb_monitor.setProgress((int) (Float.parseFloat(message.getSupernum()) /
+                Float.parseFloat(message.getTotalSupernum())));
+        pb_monitored.setProgress((int) (Float.parseFloat(message.getMonitorednum()) /
+                Float.parseFloat(message.getTotalMonitorednum())));
+
+    }
+
+    private void getSixMonthMonitored() {
+        Call<SixMonthMonitoredResult> call = apiService.getSixMonthMonitored();
+        call.enqueue(new MyCallback<SixMonthMonitoredResult>() {
+            @Override
+            public void onSuccessRequest(SixMonthMonitoredResult result) {
+                setMonthData(result.getMessage());
+            }
+
+            @Override
+            public void afterRequest() {
+
+            }
+
+            @Override
+            public void onFailureRequest(Call<SixMonthMonitoredResult> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void setMonthData(final SixMonthMonitoredBean message) {
+        List<BarEntry> entries = new ArrayList<>();
+        for (int i = 0; i < message.getMonitored().size(); i++) {
+            entries.add(new BarEntry(i,
+                    Float.parseFloat(message.getMonitored().get(i))));
+        }
+        BarDataSet dataSet = new BarDataSet(entries, "Label1");
+        dataSet.setValueTextSize(14);
+        dataSet.setColors(Color.RED, Color.GRAY, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.CYAN); // 每个点之间线的颜色，还有其他几个方法，自己看
+        dataSet.setValueFormatter(new IValueFormatter() {   // 将值转换为想要显示的形式，比如，某点值为1，变为“1￥”,MP提供了三个默认的转换器，
+            // LargeValueFormatter:将大数字变为带单位数字；PercentFormatter：将值转换为百分数；StackedValueFormatter，对于BarChart，是否只显示最大值图还是都显示
+            @Override
+            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+                return (int) value + "人";
+            }
+        });
+
+        BarData barData = new BarData(dataSet);
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setDrawAxisLine(false);
+        xAxis.setDrawGridLines(false);
+        //  xAxis.setDrawLabels(false);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float v, AxisBase axisBase) {
+
+                return message.getTime().get((int) v) + "月";
+            }
+        });
+        barChart.getAxisLeft().setDrawAxisLine(false);
+        barChart.getAxisLeft().setEnabled(false);
+        barChart.getAxisRight().setEnabled(false);
+        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        barChart.setScaleEnabled(false);
+        barChart.setDoubleTapToZoomEnabled(false);
+        Description description = new Description();
+        description.setText("");
+        barChart.setDescription(description);
+        Legend legend = barChart.getLegend();
+        legend.setEnabled(false);
+        barChart.setData(barData);
+        barChart.invalidate();
+    }
+
+    public void getCategoryTopThree() {
+        Call<HomeTopResult> call = apiService.getCategoryTopThree();
+        call.enqueue(new MyCallback<HomeTopResult>() {
+            @Override
+            public void onSuccessRequest(HomeTopResult result) {
+                if ("1".equals(result.getStatus()))
+                    setTopData(result.getMessage());
+            }
+
+            @Override
+            public void afterRequest() {
+
+            }
+
+            @Override
+            public void onFailureRequest(Call<HomeTopResult> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void setTopData(List<HomeTopBean> message) {
+        tv_name1.setText(message.get(0).getName());
+        tv_name2.setText(message.get(1).getName());
+        tv_name3.setText(message.get(2).getName());
+        float total = 0;
+        for (HomeTopBean topBean : message) {
+            total = total + Float.parseFloat(topBean.getValue());
+        }
+        DecimalFormat df = new DecimalFormat("#0.000");
+        float value1 = Float.parseFloat(message.get(0).getValue()) / total;
+        float value2 = Float.parseFloat(message.get(1).getValue()) / total;
+        float value3 = Float.parseFloat(message.get(2).getValue()) / total;
+        tv_value1.setText(Float.parseFloat(df.format(value1)) * 100 + "%");
+        tv_value2.setText(Float.parseFloat(df.format(value2)) * 100 + "%");
+        tv_value3.setText(Float.parseFloat(df.format(value3)) * 100 + "%");
+
+    }
+}

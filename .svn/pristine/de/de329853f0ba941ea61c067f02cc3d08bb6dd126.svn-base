@@ -1,0 +1,347 @@
+package com.realpower.petitionwatch.modelwatch.bean;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2018/1/3.
+ */
+
+public class MonitoredBean implements Serializable {
+
+    /**
+     * areaId : 0
+     * cars : [{"color":"string","id":0,"model":"string","monitoredId":0,"num":"string"}]
+     * code : string
+     * latitude : string
+     * longitude : string
+     * monitoredAddress : string
+     * monitoredAssessStatus : 0
+     * monitoredId : 0
+     * monitoredIdcard : string
+     * monitoredPhone : string
+     * monitoredPwd : string
+     * monitoredRealname : string
+     * permanentAddress : string
+     * phone : string
+     * relatives : [{"id":0,"idcard":"string","monitoredId":"string","phone":"string","realname":"string","relationship":"string"}]
+     * sysUserId : 0
+     */
+    private String monitoredLastimage = "";
+    private int monitoredSex;
+
+    public int getMonitoredSex() {
+        return monitoredSex;
+    }
+
+    public void setMonitoredSex(int monitoredSex) {
+        this.monitoredSex = monitoredSex;
+    }
+
+    public String getMonitoredLastimage() {
+        return monitoredLastimage;
+    }
+
+    public void setMonitoredLastimage(String monitoredLastimage) {
+        this.monitoredLastimage = monitoredLastimage;
+    }
+
+    private int areaId;
+    private String code;
+    private String latitude;
+    private String longitude;
+    private String monitoredAddress;
+    private int monitoredAssessStatus;
+    private int monitoredId;
+    private String monitoredIdcard;
+    private String monitoredPhone;
+    private String monitoredPwd;
+    private String monitoredRealname;
+    private String permanentAddress;
+    private String phone;
+    private int sysUserId;
+    private List<CarsBean> cars = new ArrayList<>();
+    private List<RelativesBean> relatives = new ArrayList<>();
+    private String monitoredCurrentaddress;
+
+    public String getMonitoredCurrentaddress() {
+        return monitoredCurrentaddress;
+    }
+
+    public void setMonitoredCurrentaddress(String monitoredCurrentaddress) {
+        this.monitoredCurrentaddress = monitoredCurrentaddress;
+    }
+
+    public int getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(int areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getMonitoredAddress() {
+        return monitoredAddress;
+    }
+
+    public void setMonitoredAddress(String monitoredAddress) {
+        this.monitoredAddress = monitoredAddress;
+    }
+
+    public int getMonitoredAssessStatus() {
+        return monitoredAssessStatus;
+    }
+
+    public void setMonitoredAssessStatus(int monitoredAssessStatus) {
+        this.monitoredAssessStatus = monitoredAssessStatus;
+    }
+
+    public int getMonitoredId() {
+        return monitoredId;
+    }
+
+    public void setMonitoredId(int monitoredId) {
+        this.monitoredId = monitoredId;
+    }
+
+    public String getMonitoredIdcard() {
+        return monitoredIdcard;
+    }
+
+    public void setMonitoredIdcard(String monitoredIdcard) {
+        this.monitoredIdcard = monitoredIdcard;
+    }
+
+    public String getMonitoredPhone() {
+        return monitoredPhone;
+    }
+
+    public void setMonitoredPhone(String monitoredPhone) {
+        this.monitoredPhone = monitoredPhone;
+    }
+
+    public String getMonitoredPwd() {
+        return monitoredPwd;
+    }
+
+    public void setMonitoredPwd(String monitoredPwd) {
+        this.monitoredPwd = monitoredPwd;
+    }
+
+    public String getMonitoredRealname() {
+        return monitoredRealname;
+    }
+
+    public void setMonitoredRealname(String monitoredRealname) {
+        this.monitoredRealname = monitoredRealname;
+    }
+
+    public String getPermanentAddress() {
+        return permanentAddress;
+    }
+
+    public void setPermanentAddress(String permanentAddress) {
+        this.permanentAddress = permanentAddress;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getSysUserId() {
+        return sysUserId;
+    }
+
+    public void setSysUserId(int sysUserId) {
+        this.sysUserId = sysUserId;
+    }
+
+    public List<CarsBean> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<CarsBean> cars) {
+        this.cars = cars;
+    }
+
+    public List<RelativesBean> getRelatives() {
+        return relatives;
+    }
+
+    public void setRelatives(List<RelativesBean> relatives) {
+        this.relatives = relatives;
+    }
+
+    public static class CarsBean implements Serializable {
+        public CarsBean(String color, String model, String num, int id) {
+            this.color = color;
+            this.model = model;
+            this.num = num;
+            this.id = id;
+        }
+
+        public CarsBean() {
+
+        }
+
+        /**
+         * color : string
+         * id : 0
+         * model : string
+         * monitoredId : 0
+         * num : string
+         */
+
+        private String color;
+        private int id;
+        private String model;
+        private int monitoredId;
+        private String num;
+
+        public String getColor() {
+            return color;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getModel() {
+            return model;
+        }
+
+        public void setModel(String model) {
+            this.model = model;
+        }
+
+        public int getMonitoredId() {
+            return monitoredId;
+        }
+
+        public void setMonitoredId(int monitoredId) {
+            this.monitoredId = monitoredId;
+        }
+
+        public String getNum() {
+            return num;
+        }
+
+        public void setNum(String num) {
+            this.num = num;
+        }
+    }
+
+    public static class RelativesBean implements Serializable {
+        public RelativesBean(String idcard, String phone, String realname, String relationship) {
+            this.idcard = idcard;
+            this.phone = phone;
+            this.realname = realname;
+            this.relationship = relationship;
+        }
+
+        public RelativesBean() {
+
+        }
+
+        /**
+         * id : 0
+         * idcard : string
+         * monitoredId : string
+         * phone : string
+         * realname : string
+         * relationship : string
+         */
+
+        private int id;
+        private String idcard;
+        private String monitoredId;
+        private String phone;
+        private String realname;
+        private String relationship;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getIdcard() {
+            return idcard;
+        }
+
+        public void setIdcard(String idcard) {
+            this.idcard = idcard;
+        }
+
+        public String getMonitoredId() {
+            return monitoredId;
+        }
+
+        public void setMonitoredId(String monitoredId) {
+            this.monitoredId = monitoredId;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getRealname() {
+            return realname;
+        }
+
+        public void setRealname(String realname) {
+            this.realname = realname;
+        }
+
+        public String getRelationship() {
+            return relationship;
+        }
+
+        public void setRelationship(String relationship) {
+            this.relationship = relationship;
+        }
+    }
+}

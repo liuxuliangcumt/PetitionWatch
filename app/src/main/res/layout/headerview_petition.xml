@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="89dp"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="33dp"
+    android:paddingRight="33dp"
+    android:paddingTop="8dp">
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_petition"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/bg_common"
+        android:drawableLeft="@drawable/search"
+        android:drawablePadding="16dp"
+        android:hint="搜索"
+        android:paddingLeft="6dp"
+        android:textColorHint="@color/c999999"
+        android:textSize="14sp" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/petition_btn"
+        android:layout_width="295dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1"
+        android:text="新建诉求"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+</LinearLayout>

@@ -1,0 +1,218 @@
+package com.realpower.petitionwatch.modelwatch.activity;
+
+import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.chatui.fragment.ConversationFragment;
+import com.realpower.petitionwatch.chatui.fragment.ConversationFragment_;
+import com.realpower.petitionwatch.fragment.BaseFragment;
+import com.realpower.petitionwatch.fragment.ContactsFragment;
+import com.realpower.petitionwatch.fragment.ContactsFragment_;
+import com.realpower.petitionwatch.util.DataGenerator;
+import com.realpower.petitionwatch.util.MyToastUtils;
+import com.realpower.petitionwatch.modelwatch.fragment.AlarmFragment;
+import com.realpower.petitionwatch.modelwatch.fragment.AlarmFragment_;
+import com.realpower.petitionwatch.modelwatch.fragment.KeypersonFragment;
+import com.realpower.petitionwatch.modelwatch.fragment.KeypersonFragment_;
+import com.realpower.petitionwatch.modelwatch.fragment.MeFragment;
+import com.realpower.petitionwatch.modelwatch.fragment.MeFragment_;
+import com.realpower.petitionwatch.modelwatch.fragment.TaskFragment;
+import com.realpower.petitionwatch.modelwatch.fragment.TaskFragment_;
+import com.realpower.petitionwatch.server.LocationServer;
+import com.realpower.petitionwatch.util.SystemInfoUtils;
+import com.realpower.petitionwatch.view.CustomDialog;
+
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+@EActivity
+public class WatchMainActivity extends BaseActivity {
+    @ViewById(R.id.tablayout)
+    TabLayout tablayout;
+    TaskFragment taskFragment;
+    MeFragment meFragment;
+    KeypersonFragment keyFragment;
+    AlarmFragment alarmFragment;
+    ContactsFragment contactsFragment;
+    //ConversationFragment conversationFragment;
+    ConversationFragment conversationFragment;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_watch_main);
+        Intent startIntent = new Intent(this, LocationServer.class);
+        //startIntent.putExtra("username", username);
+        startService(startIntent);
+        onInitViews();
+    }
+
+    void onInitViews() {
+       /* petitionFragment = PetitionFragment_.builder().build();
+        meFragment = MeFragment_.builder().build();
+        suggestFragment = SuggestFragment_.builder().build();*/
+        taskFragment = TaskFragment_.builder().build();
+        meFragment = MeFragment_.builder().build();
+        keyFragment = KeypersonFragment_.builder().build();
+        alarmFragment = AlarmFragment_.builder().build();
+        contactsFragment = ContactsFragment_.builder().build();
+        conversationFragment = ConversationFragment_.builder().build();
+       // conversationFragment = new ConversationFragment();
+        tablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                onTabItemSelected(tab.getPosition());
+                // Tab 选中之后，改变各个Tab的状态
+                for (int i = 0; i < tablayout.getTabCount(); i++) {
+                    View view = tablayout.getTabAt(i).getCustomView();
+                    ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
+                    TextView text = (TextView) view.findViewById(R.id.tab_content_text);
+                    if (i == tab.getPosition()) { // 选中状态
+                        icon.setImageResource(DataGenerator.mTabResPressed[i]);
+                        //   text.setTextColor(getResources().getColor(android.R.color.black));
+                    } else {// 未选中状态
+                        icon.setImageResource(DataGenerator.mTabRes[i]);
+                        //  text.setTextColor(getResources().getColor(android.R.color.darker_gray));
+                    }
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        for (int i = 0; i < 5; i++) {
+            tablayout.addTab(tablayout.newTab().setCustomView(DataGenerator.getTabView(this, i)));
+        }
+    }
+
+    private void onTabItemSelected(int position) {
+        Fragment fragment = null;
+        switch (position) {
+            case 0:
+                fragment = conversationFragment;
+                break;
+            case 1:
+                fragment = contactsFragment;
+                break;
+            case 3:
+                fragment = alarmFragment;
+                break;
+            case 4:
+                fragment = meFragment;
+                break;
+        }
+        if (position == 2) {
+
+        } else if (position == 0) {
+            switchContent(conversationFragment);
+        } else {
+            switchContent(fragment);
+        }
+    }
+
+    /**
+     * 修改显示的内容 不会重新加载
+     **/
+    public void switchContent(Fragment to) {
+        if (mContent != to) {
+            FragmentTransaction transaction = getSupportFragmentManager()
+                    .beginTransaction();
+            if (!to.isAdded()) { // 先判断是否被add过
+                transaction.hide(mContent).add(R.id.home_container, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                transaction.hide(mContent).show(to).commit(); // 隐藏当前的fragment，显示下一个
+            }
+            mContent = to;
+        }
+    }
+
+    private Fragment mContent = new Fragment();
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("aaa", requestCode + "   WatchMainActivity   " + resultCode);
+
+        alarmFragment.onActivityResult(requestCode, resultCode, data);
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private long mExitTime = 0;
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            MyToastUtils.showToast("再按一次退出应用");
+            mExitTime = System.currentTimeMillis();
+            return;
+        } else if ((System.currentTimeMillis() - mExitTime) < 2000) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //如果是服务里调用，必须加入new task标识
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Click(R.id.iv_plus)
+    void onViewClick() {
+        showChoseDailog();
+    }
+
+    private void showChoseDailog() {
+        //任务 task   重点人key
+        final CustomDialog dialog = new CustomDialog(this, R.style.customDialog,
+                R.layout.dialog_watch_mainchose);
+        dialog.show();
+        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        layoutParams.width = (int) (SystemInfoUtils.getWindowsWidth(this));
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(layoutParams);
+        ImageView iv_cha = (ImageView) dialog.getCustomView().findViewById(R.id.iv_cha);
+        LinearLayout ll_key = (LinearLayout) dialog.getCustomView().findViewById(R.id.ll_key);
+        LinearLayout ll_task = (LinearLayout) dialog.getCustomView().findViewById(R.id.ll_task);
+        iv_cha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        ll_key.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                KeypersonActivity_.intent(WatchMainActivity.this).start();
+            }
+        });
+        ll_task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TaskActivity_.intent(WatchMainActivity.this).start();
+            }
+        });
+
+    }
+}

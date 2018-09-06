@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelcounty.activity.KeyPersonDetailActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="33dp"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c909090"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="身份证号"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tv_idCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c909090"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="手机号"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="车辆型号"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_carType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂无"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="车辆牌号"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_carNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂无"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="车辆颜色"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_carColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂无"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <LinearLayout
+                android:id="@+id/ll_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="所在地区"
+                    android:textColor="@color/c6d6d6d"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:textColor="@color/c909090"
+                    android:textSize="15sp"
+                    android:theme="@style/MyEdittext" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="详细地址"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_addressDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="暂无"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:id="@+id/tv_picLoad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="照片上传"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <com.realpower.petitionwatch.view.CustomGridVeiw
+                android:id="@+id/GV_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="13dp"
+                android:horizontalSpacing="10dp"
+                android:numColumns="2"
+                android:verticalSpacing="8dp"></com.realpower.petitionwatch.view.CustomGridVeiw>
+
+
+
+            <TextView
+                android:id="@+id/tv_kins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="亲属信息"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_kins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/cf7f7f7"
+                android:divider="#f1f1f1"
+                android:dividerHeight="10dp"></com.realpower.petitionwatch.view.CustomListView>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_edit"
+                android:layout_width="112dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="75dp"
+                android:layout_marginTop="95dp"
+                android:background="@color/cE59C0E"
+                android:gravity="center"
+                android:text="监控"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:theme="@style/MyButten_Borderless" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

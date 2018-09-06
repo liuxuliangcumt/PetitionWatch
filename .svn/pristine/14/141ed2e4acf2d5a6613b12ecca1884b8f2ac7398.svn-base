@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.activity.LoginActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/bg_gradual" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/logo_image" />
+    </RelativeLayout>
+
+    <com.realpower.petitionwatch.view.ClearEditText
+        android:id="@+id/et_account"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_login_clear"
+        android:drawableLeft="@mipmap/mobil_phone_icon"
+        android:drawablePadding="15dp"
+        android:hint="输入手机号码"
+        android:inputType="number"
+        android:lines="1"
+        android:maxLength="11"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="16sp" />
+    <!--
+    android:hint="请输入手机号或身份证号"-->
+    <com.realpower.petitionwatch.view.PassWordEditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_login_clear"
+        android:drawableLeft="@mipmap/password_icon"
+        android:drawablePadding="15dp"
+        android:hint="输入密码"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+
+            android:text="忘记密码"
+            android:textColor="@color/cb3b3b3"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_login_btn"
+        android:text="登录"
+        android:textColor="@color/textColor"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_login_btn"
+        android:text="注册"
+        android:textColor="@color/textColor"
+        android:textSize="16sp" />
+</LinearLayout>

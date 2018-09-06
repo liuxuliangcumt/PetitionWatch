@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingLeft="13dp"
+    android:paddingRight="13dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="13dp">
+
+    <ImageView
+        android:id="@+id/iv_state"
+        android:layout_width="41dp"
+        android:layout_height="41dp"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/deeled" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小区方式撒旦法规"
+            android:textColor="@color/c4d4d4d"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="阿斯蒂芬gas大法师电饭锅内容"
+            android:textColor="@color/c4d4d4d"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017年12月21日"
+            android:textColor="@color/c999999"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_deel"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="反馈意见"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="13dp"
+        android:src="@drawable/iv_arrow" />
+</LinearLayout>

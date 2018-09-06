@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelcounty.activity.AlarmDetailActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="33dp"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重点人姓名"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="监控人员"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_monitor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <!-- <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="15dp"
+                 android:text="重点人安全等级"
+                 android:textColor="@color/c6d6d6d"
+                 android:textSize="16sp" />
+
+
+             <TextView
+                 android:id="@+id/tv_safeLeve"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="高"
+                 android:textColor="@color/c909090"
+                 android:textSize="15sp"
+                 android:theme="@style/MyEdittext" />-->
+
+
+            <!--  <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="15dp"
+                  android:text="分配监控时间"
+                  android:textColor="@color/c6d6d6d"
+                  android:textSize="16sp" />
+
+              <TextView
+                  android:id="@+id/tv_monitorTime"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="2017/12/02 12:30-2018/01/01 18:20"
+                  android:textColor="@color/c909090"
+                  android:textSize="15sp"
+                  android:theme="@style/MyEdittext" />-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="重点人所属地点"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="告警信息描述"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_alarmDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:id="@+id/tv_picname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="照片上传"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <com.realpower.petitionwatch.view.CustomGridVeiw
+                android:id="@+id/gv_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:horizontalSpacing="10dp"
+                android:numColumns="2"
+                android:verticalSpacing="8dp"></com.realpower.petitionwatch.view.CustomGridVeiw>
+
+            <TextView
+                android:id="@+id/tv_videoname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="视频上传"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"></com.realpower.petitionwatch.view.CustomListView>
+
+            <TextView
+                android:id="@+id/tv_voicename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="语音上传"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_voice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_feedback"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="70dp"
+                android:layout_marginTop="68dp"
+                android:text="上报"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

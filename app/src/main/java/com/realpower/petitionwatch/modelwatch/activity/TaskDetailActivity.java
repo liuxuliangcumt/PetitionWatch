@@ -1,0 +1,140 @@
+package com.realpower.petitionwatch.modelwatch.activity;
+
+import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.net.MyCallback;
+import com.realpower.petitionwatch.net.param.TaskParam;
+import com.realpower.petitionwatch.net.result.WatcherTaskResult;
+import com.realpower.petitionwatch.modelwatch.bean.WatcherTaskBean;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.ViewById;
+
+import retrofit2.Call;
+
+@EActivity
+public class TaskDetailActivity extends BaseActivity {
+    @Extra
+    int taskId;
+    @Extra
+    WatcherTaskBean bean;
+    @ViewById
+    TextView tv_timeToday;
+    @ViewById
+    TextView tv_time;
+    @ViewById
+    TextView tv_name;
+    @ViewById
+    TextView tv_phone;
+    @ViewById
+    TextView tv_idCard;
+    MapView mapview;
+    BaiduMap mBaiduMap;
+    @ViewById
+    AppCompatButton btn_back;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_task_deatil);
+        mapview = (MapView) findViewById(R.id.mapView);
+        mBaiduMap = mapview.getMap();
+        setData();
+    }
+
+    @AfterViews
+    void initViews() {
+        setTitleName("任务详情");
+        // getData();
+
+    }
+
+    private void setData() {
+        tv_name.setText(bean.getMonitored().getMonitoredRealname());
+        tv_idCard.setText(bean.getMonitored().getMonitoredIdcard());
+        tv_phone.setText(bean.getMonitored().getMonitoredPhone());
+      /*
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        String startTime = format.format(bean.getStarttime());
+        String ednTime = format.format(bean.getEndtime());
+        String lastTime = format.format(bean.getLasttime());*/
+        tv_time.setText(bean.getStarttime() + "---" + bean.getEndtime());
+        tv_timeToday.setText(bean.getLasttime());
+        if (bean.getMonitored().getLatitude().length() != 0 &&
+                !"4.9E-324".equals(bean.getMonitored().getLatitude())) {
+            LatLng latLng = new LatLng(Double.parseDouble(bean.getMonitored().getLatitude()),
+                    Double.parseDouble(bean.getMonitored().getLongitude()));
+           /* BitmapDescriptor bmStart = BitmapDescriptorFactory.fromResource(R.drawable.icon_z_r);
+            MarkerOptions startMarker = new MarkerOptions().position(latLng)
+                    .icon(bmStart).zIndex(9).draggable(true);*/
+            OverlayOptions ooA = new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory
+                    .fromResource(R.drawable.location))
+                    .zIndex(4).draggable(false);
+            mBaiduMap.clear();
+            mBaiduMap.addOverlay(ooA);
+            MapStatusUpdate u = MapStatusUpdateFactory.newLatLngZoom(latLng, 17.0f);
+            mBaiduMap.animateMapStatus(u);
+            Log.e("aaa", "任务详情 坐标   " + bean.getMonitored().getLatitude() + "  " + bean.getMonitored().getLongitude());
+
+        } else {
+            Log.e("aaa", "任务详情 坐标有误  " + bean.getMonitored());
+        }
+        if (bean.getStatus() != 1) {
+            btn_back.setText("已结束");
+            btn_back.setClickable(false);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+    }
+
+    private void getData() {
+        Call<WatcherTaskResult> call = apiService.getTaskById(new TaskParam(bean.getTaskId()));
+        call.enqueue(new MyCallback<WatcherTaskResult>() {
+            @Override
+            public void onSuccessRequest(WatcherTaskResult result) {
+                bean = result.getMessage();
+                setData();
+            }
+
+            @Override
+            public void afterRequest() {
+
+            }
+
+            @Override
+            public void onFailureRequest(Call<WatcherTaskResult> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Click(R.id.btn_back)
+    void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                TaskBackActivity_.intent(this).bean(bean).start();
+                break;
+        }
+    }
+}

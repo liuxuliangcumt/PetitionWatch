@@ -1,0 +1,291 @@
+package com.realpower.petitionwatch.modelcounty.activity;
+
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.codbking.widget.DatePickDialog;
+import com.codbking.widget.OnSureLisener;
+import com.codbking.widget.bean.DateType;
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.modelcounty.adapter.SupervisorAdapter;
+import com.realpower.petitionwatch.modelcounty.bean.SupervisorBean;
+import com.realpower.petitionwatch.net.MyCallback;
+import com.realpower.petitionwatch.net.param.NewMonitorTaskParam;
+import com.realpower.petitionwatch.net.param.PagingParam;
+import com.realpower.petitionwatch.net.result.StringResult;
+import com.realpower.petitionwatch.net.result.SupervisorResult;
+import com.realpower.petitionwatch.util.MyToastUtils;
+import com.realpower.petitionwatch.util.SystemInfoUtils;
+import com.realpower.petitionwatch.view.ClearEditText;
+import com.realpower.petitionwatch.view.CustomDialog;
+import com.realpower.petitionwatch.view.addressview.PickAddressInterface;
+import com.realpower.petitionwatch.view.addressview.PickAddressView;
+
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.ViewById;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+
+//新建监控任务
+@EActivity
+public class NewMonitorTaskActivity extends BaseActivity {
+    private NewMonitorTaskParam param;
+
+    @ViewById
+    TextView tv_monitored, tv_time, tv_monitor;
+    @ViewById
+    ClearEditText et_title, et_content;
+    @Extra
+    String name;
+    @Extra
+    int id;
+    @ViewById(R.id.tv_address)
+    TextView tv_address;
+    private String areaID = "";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_monitor_task);
+        setTitleName("新建监控任务");
+        tv_monitored.setText(name);
+        param = new NewMonitorTaskParam();
+        param.setMonitoredId(id + "");
+    }
+
+
+    private List<SupervisorBean.ListBean> supervisorData = new ArrayList<>();
+
+    public void getSuperData() {
+        Call<SupervisorResult> call1 = apiService.supervisorAll(new PagingParam("1"));
+        call1.enqueue(new MyCallback<SupervisorResult>() {
+            @Override
+            public void onSuccessRequest(SupervisorResult result) {
+                if ("1".equals(result.getStatus())) {
+                    supervisorData.clear();
+                    supervisorData.addAll(result.getMessage().getList());
+                    showListDailog();
+                }
+            }
+
+            @Override
+            public void afterRequest() {
+
+            }
+
+            @Override
+            public void onFailureRequest(Call<SupervisorResult> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Click({R.id.btn_ok, R.id.tv_monitor, R.id.tv_time, R.id.tv_address})
+    void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_ok:
+                newTask();
+                break;
+            case R.id.tv_monitor:
+                getSuperData();
+                break;
+            case R.id.tv_time:
+                showChoseTimeDalog(1);
+                break;
+            case R.id.tv_address:
+                showAddressDialog();
+                break;
+        }
+    }
+
+    private void showAddressDialog() {
+        final CustomDialog dialog = new CustomDialog(this, R.style.customDialog, R.layout.dialog_chose_address);
+        dialog.show();
+        dialog.getWindow().setWindowAnimations(R.style.DialogBottom);
+        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        layoutParams.width = (int) (SystemInfoUtils.getWindowsWidth(this));
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(layoutParams);
+        PickAddressView pickView = (PickAddressView) dialog.getCustomView().findViewById(R.id.pickView);
+        pickView.setOnTopClicklistener(new PickAddressInterface() {
+            @Override
+            public void onOkClick(String name, String areaId) {
+                tv_address.setText(name);
+                areaID = areaId;
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onCancelClick() {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+    private void newTask() {
+        String title = et_title.getText().toString().trim();
+        String content = et_content.getText().toString().trim();
+        if (title.length() == 0) {
+            MyToastUtils.showToast("请输入任务标题");
+            return;
+        }
+        if (content.length() == 0) {
+            MyToastUtils.showToast("请输入任务内容");
+            return;
+        }
+        if (param.getEndtime() == null) {
+            MyToastUtils.showToast("请选择起止时间");
+            return;
+        }
+        if (param.getSupervisorId().length() == 0) {
+            MyToastUtils.showToast("请选择监控工作人员");
+            return;
+        }
+        if (areaID.length() == 0) {
+            MyToastUtils.showToast("请选择区域");
+            return;
+        }
+        param.setTitle(title);
+        param.setInfo(content);
+        param.setAreaId(areaID);
+        showMyDialog("请稍后");
+        Call<StringResult> call = apiService.addTask(param);
+        call.enqueue(new MyCallback<StringResult>() {
+            @Override
+            public void onSuccessRequest(StringResult result) {
+                if ("1".equals(result.getStatus())) {
+                    MyToastUtils.showToast("新建成功");
+                    finish();
+                } else {
+                    MyToastUtils.showToast("创建失败");
+                }
+
+            }
+
+            @Override
+            public void afterRequest() {
+                hideDialog();
+            }
+
+            @Override
+            public void onFailureRequest(Call<StringResult> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private String startTime;
+
+    private void showChoseTimeDalog(final int type) {
+
+        DatePickDialog dialog = new DatePickDialog(this);
+        dialog.setYearLimt(5);
+        if (type == 1) {
+            dialog.setTitle("选择开始时间");
+        } else {
+            dialog.setStartDate(param.getStarttimeDate());
+            dialog.setTitle("选择结束时间");
+        }
+        //设置类型
+        dialog.setType(DateType.TYPE_ALL);
+        //设置消息体的显示格式，日期格式
+        dialog.setMessageFormat("yyyy-MM-dd HH:mm:SS");
+        //设置选择回调
+        dialog.setOnChangeLisener(null);
+        //设置点击确定按钮回调
+        dialog.setOnSureLisener(new OnSureLisener() {
+            @Override
+            public void onSure(Date date) {
+                String format = "yyyy-MM-dd HH:mm:SS";
+                String messge = "";
+                try {
+                    messge = new SimpleDateFormat(format).format(date);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                if (type == 1) {
+                    startTime = messge;
+                    param.setStarttimeDate(date);
+                    param.setStarttime(messge);
+                    showChoseTimeDalog(2);
+                } else {
+                    if (param.getStarttimeDate().after(date)) {
+                        MyToastUtils.showToast("开始时间不能大于结束时间");
+                        showChoseTimeDalog(2);
+                        return;
+                    }
+                    tv_time.setText(startTime + "---" + messge);
+                    param.setEndtimeDate(date);
+                    param.setEndtime(messge);
+                }
+
+            }
+        });
+
+        dialog.show();
+
+
+    }
+
+    private void showListDailog() {
+        param.setSupervisorId("");
+        final CustomDialog dialog = new CustomDialog(this, R.style.customDialog, R.layout.dialog_m_task_list);
+        dialog.show();
+        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        layoutParams.width = (int) (SystemInfoUtils.getWindowsWidth(this));
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(layoutParams);
+        TextView tv_ok = (TextView) dialog.getCustomView().findViewById(R.id.tv_ok);
+        TextView tv_cancel = (TextView) dialog.getCustomView().findViewById(R.id.tv_cancel);
+        ListView lv_monitor = (ListView) dialog.findViewById(R.id.lv_monitor);
+        SupervisorAdapter supervisorAdapter = new SupervisorAdapter(this, supervisorData);
+        lv_monitor.setAdapter(supervisorAdapter);
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String ids = "";
+                String names = "";
+                for (SupervisorBean.ListBean listBean : supervisorData) {
+                    if (listBean.isCheck()) {
+                        ids = ids + listBean.getSupervisorId() + ",";
+                        names = names + " " + listBean.getSupervisorRealname();
+                    }
+                }
+                if (ids.length() == 0) {
+                    MyToastUtils.showToast("请选择监控工作人员");
+                    return;
+                } else {
+                    tv_monitor.setText(names);
+                    param.setSupervisorId(ids.substring(0, ids.length() - 1));
+                }
+                dialog.dismiss();
+            }
+        });
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+}

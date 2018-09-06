@@ -1,0 +1,218 @@
+package com.realpower.petitionwatch.modelcounty.activity;
+
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.activity.CamerasActivity_;
+import com.realpower.petitionwatch.activity.TrackActivity_;
+import com.realpower.petitionwatch.chatui.fragment.ConversationFragment;
+import com.realpower.petitionwatch.chatui.fragment.ConversationFragment_;
+import com.realpower.petitionwatch.fragment.BaseFragment;
+import com.realpower.petitionwatch.fragment.ContactsFragment;
+import com.realpower.petitionwatch.fragment.ContactsFragment_;
+import com.realpower.petitionwatch.modelcounty.fragment.AlarmListFragment;
+import com.realpower.petitionwatch.modelcounty.fragment.AlarmListFragment_;
+import com.realpower.petitionwatch.modelcounty.fragment.HomeFragment;
+import com.realpower.petitionwatch.modelcounty.fragment.HomeFragment_;
+import com.realpower.petitionwatch.modelcounty.fragment.MonitorTasksFragment;
+import com.realpower.petitionwatch.modelcounty.fragment.MonitorTasksFragment_;
+import com.realpower.petitionwatch.modelcounty.fragment.ManageFragment;
+import com.realpower.petitionwatch.modelcounty.fragment.ManageFragment_;
+import com.realpower.petitionwatch.util.DataGenerator;
+import com.realpower.petitionwatch.util.SystemInfoUtils;
+import com.realpower.petitionwatch.view.CustomDialog;
+import com.tencent.imsdk.TIMConversation;
+import com.tencent.imsdk.TIMConversationType;
+import com.tencent.imsdk.TIMManager;
+import com.tencent.imsdk.TIMMessage;
+import com.tencent.imsdk.TIMTextElem;
+import com.tencent.imsdk.TIMValueCallBack;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+@EActivity
+public class CountyMainActivity extends BaseActivity {
+    @ViewById(R.id.tablayout)
+    TabLayout tablayout;
+    AlarmListFragment alarmListFragment;
+    MonitorTasksFragment tasksFragment;
+    ManageFragment manageFragment;
+    HomeFragment homeFragment;
+    ContactsFragment contactsFragment;
+    // ConversationFragment conversationFragment;
+    ConversationFragment conversationFragment;
+    public static CountyMainActivity instance;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_county_main);
+        instance = this;
+    }
+
+    @AfterViews
+    void onInItViews() {
+        alarmListFragment = AlarmListFragment_.builder().build();
+        tasksFragment = MonitorTasksFragment_.builder().build();
+        manageFragment = ManageFragment_.builder().build();
+        homeFragment = HomeFragment_.builder().build();
+        contactsFragment = ContactsFragment_.builder().build();
+        conversationFragment = ConversationFragment_.builder().build();
+        // conversationFragment = new ConversationFragment();
+        tablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                onTabItemSelected(tab.getPosition());
+                // Tab 选中之后，改变各个Tab的状态
+                for (int i = 0; i < tablayout.getTabCount(); i++) {
+                    View view = tablayout.getTabAt(i).getCustomView();
+                    ImageView icon = (ImageView) view.findViewById(R.id.tab_content_image);
+                    TextView text = (TextView) view.findViewById(R.id.tab_content_text);
+                    if (i == tab.getPosition()) { // 选中状态
+                        icon.setImageResource(DataGenerator.mCountTabResPressed[i]);
+                        //   text.setTextColor(getResources().getColor(android.R.color.black));
+                    } else {// 未选中状态
+                        icon.setImageResource(DataGenerator.mCountTabRes[i]);
+                        //  text.setTextColor(getResources().getColor(android.R.color.darker_gray));
+                    }
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        for (int i = 0; i < 5; i++) {
+            tablayout.addTab(tablayout.newTab().setCustomView(DataGenerator.getCountyTabView(this, i)));
+        }
+        conversation = TIMManager.getInstance().getConversation(
+                TIMConversationType.C2C,    //会话类型：单聊
+                "test");
+    }
+
+    TIMConversation conversation;
+
+    private void onTabItemSelected(int position) {
+        BaseFragment fragment = null;
+        switch (position) {
+            case 3:
+                fragment = alarmListFragment;
+                break;
+            case 1:
+                fragment = contactsFragment;
+                break;
+            case 4:
+                //fragment = tasksFragment;
+                fragment=homeFragment;
+                break;
+            case 0:
+                //  fragment = conversationFragment;
+                break;
+        }
+        if (position == 2) {
+
+        } else if (position == 0) {
+            switchContent(conversationFragment);
+        } else {
+            switchContent(fragment);
+        }
+    }
+
+    /**
+     * 修改显示的内容 不会重新加载
+     **/
+    public void switchContent(Fragment to) {
+        if (mContent != to) {
+            FragmentTransaction transaction = getSupportFragmentManager()
+                    .beginTransaction();
+            if (!to.isAdded()) { // 先判断是否被add过
+                transaction.hide(mContent).add(R.id.home_container, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                transaction.hide(mContent).show(to).commit(); // 隐藏当前的fragment，显示下一个
+            }
+            mContent = to;
+        }
+    }
+
+    private Fragment mContent = new Fragment();
+
+    @Click(R.id.iv_plus)
+    void onViewClick() {
+        showChoseDailog();
+    }
+
+
+    private void showChoseDailog() {
+        final CustomDialog dialog = new CustomDialog(this, R.style.customDialog, R.layout.dialog_county_mainchose);
+        dialog.show();
+        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        layoutParams.width = (int) (SystemInfoUtils.getWindowsWidth(this));
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(layoutParams);
+        ImageView iv_cha = (ImageView) dialog.getCustomView().findViewById(R.id.iv_cha);
+        LinearLayout ll_set = (LinearLayout) dialog.getCustomView().findViewById(R.id.ll_set);
+        LinearLayout ll_location = (LinearLayout) dialog.getCustomView().findViewById(R.id.ll_location);
+        LinearLayout ll_task = (LinearLayout) dialog.getCustomView().findViewById(R.id.ll_task);
+        LinearLayout ll_manage = (LinearLayout) dialog.getCustomView().findViewById(R.id.ll_manage);
+        LinearLayout ll_camera = (LinearLayout) dialog.getCustomView().findViewById(R.id.ll_camera);
+        iv_cha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        ll_set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CountySetActivity_.intent(CountyMainActivity.this).start();
+            }
+        });
+        ll_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TrackActivity_.intent(CountyMainActivity.this).start();
+            }
+        });
+        ll_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CamerasActivity_.intent(CountyMainActivity.this).start();
+            }
+        });
+        ll_task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyTaskActivity_.intent(CountyMainActivity.this).start();
+            }
+        });
+        ll_manage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ManagerActivity_.intent(CountyMainActivity.this).start();
+            }
+        });
+    }
+}

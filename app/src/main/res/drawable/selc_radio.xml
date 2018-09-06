@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--被按压时-->
+    <item android:state_checked="true">
+
+        <shape android:shape="rectangle">
+            <size android:width="32dp" android:height="20dp" />
+            <corners android:radius="10dp" />
+            <gradient android:angle="-90" android:endColor="@color/c417fcc" android:startColor="@color/c519fff" />
+        </shape>
+    </item>
+
+    <!--普通状态，这里在stroke中通过dashWidth和dashGap设置边线为虚线-->
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <size android:width="32dp" android:height="20dp" />
+            <corners android:radius="10dp" />
+            <solid android:color="@color/cf0f0f0" />
+        </shape>
+    </item>
+</selector>

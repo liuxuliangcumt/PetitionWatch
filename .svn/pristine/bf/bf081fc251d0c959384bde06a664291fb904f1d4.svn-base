@@ -1,0 +1,70 @@
+package com.realpower.petitionwatch.modelcounty.adapter;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.adapter.MyBaseAdapter;
+import com.realpower.petitionwatch.modelcounty.activity.NewMonitorTaskActivity_;
+import com.realpower.petitionwatch.modelcounty.bean.MonitoredBean;
+import com.realpower.petitionwatch.util.MyToastUtils;
+
+import java.util.List;
+
+/**
+ * 重点人
+ */
+
+public class ManagerMonitorAdapter extends MyBaseAdapter<MonitoredBean.ListBean> {
+
+    public ManagerMonitorAdapter(Context context, List<MonitoredBean.ListBean> data) {
+        super(context, data);
+    }
+
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
+        if (convertView == null) {
+            convertView = View.inflate(context, R.layout.item_listview_county_monitored, null);
+            holder = new ViewHolder();
+            holder.iv_state = (ImageView) convertView.findViewById(R.id.iv_state);
+            holder.tv_state = (TextView) convertView.findViewById(R.id.tv_state);
+            holder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.tv_number = (TextView) convertView.findViewById(R.id.tv_number);
+            holder.btn_monitor = (Button) convertView.findViewById(R.id.btn_monitor);
+            convertView.setTag(holder);
+
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.tv_name.setText("重点人:" + data.get(position).getMonitoredRealname());
+        holder.tv_number.setText("手机号码:" + data.get(position).getMonitoredPhone());
+        if ("待监控".equals(data.get(position).getIsInTask())) {
+            holder.btn_monitor.setVisibility(View.VISIBLE);
+            holder.iv_state.setImageDrawable(context.getResources().getDrawable(R.drawable.no_monitored));
+            holder.tv_state.setText("未监控");
+        } else {
+            holder.tv_state.setText("监控中");
+            holder.iv_state.setImageDrawable(context.getResources().getDrawable(R.drawable.in_monitor));
+            holder.btn_monitor.setVisibility(View.GONE);
+        }
+        holder.btn_monitor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewMonitorTaskActivity_.intent(context).name(data.get(position).getMonitoredRealname()).id(data.get(position).getMonitoredId()).start();
+            }
+        });
+        return convertView;
+    }
+
+    private class ViewHolder {
+        ImageView iv_state;
+        TextView tv_state, tv_name, tv_number;
+        Button btn_monitor;
+
+    }
+}

@@ -1,0 +1,56 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.realpower.timchat"  >
+
+    <application
+        android:label="Vitamio">
+
+    <activity
+        android:name=".activity.HostLoginActivity"
+        android:label="@string/tencent_tls_ui_app_name"
+        android:theme="@style/tencent_tls_ui_theme">
+    </activity>
+    <activity
+        android:name=".activity.HostRegisterActivity"
+        android:label="@string/tencent_tls_ui_title_activity_host_register"
+        android:launchMode="singleTask"
+        android:theme="@style/tencent_tls_ui_theme">
+    </activity>
+    <activity
+        android:name=".activity.IndependentLoginActivity"
+        android:label="@string/tencent_tls_ui_title_activity_independent_login"
+
+        android:theme="@style/tencent_tls_ui_theme" >
+    </activity>
+    <activity
+        android:name=".activity.IndependentRegisterActivity"
+        android:label="@string/tencent_tls_ui_title_activity_independent_register"
+        android:launchMode="singleTask"
+        android:theme="@style/tencent_tls_ui_theme" >
+    </activity>
+    <activity
+        android:name=".activity.ImgCodeActivity"
+        android:label="@string/tencent_tls_ui_title_activity_imgcode"
+        android:launchMode="singleTask"
+        android:theme="@style/tencent_tls_ui_theme">
+    </activity>
+    <activity
+        android:name=".activity.PhonePwdLoginActivity"
+        android:label="@string/tencent_tls_ui_title_activity_phone_pwd"
+        android:launchMode="singleTask"
+        android:theme="@style/tencent_tls_ui_theme">
+    </activity>
+    <activity
+        android:name=".activity.PhonePwdRegisterActivity"
+        android:label="@string/tencent_tls_ui_title_activity_phone_pwd_register"
+        android:launchMode="singleTask"
+        android:theme="@style/tencent_tls_ui_theme">
+    </activity>
+    <activity
+        android:name=".activity.ResetPhonePwdActivity"
+        android:label="@string/tencent_tls_ui_title_activity_reset_phone_pwd"
+        android:launchMode="singleTask"
+        android:theme="@style/tencent_tls_ui_theme">
+    </activity>
+    </application>
+
+</manifest>
