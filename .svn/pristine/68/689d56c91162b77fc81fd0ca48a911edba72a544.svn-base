@@ -1,0 +1,77 @@
+package com.realpower.petitionwatch.util;
+
+import android.content.Context;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.realpower.petitionwatch.R;
+
+/**
+ * Created by ruipu on 2018/9/26.
+ */
+
+public class EmptyViewHelper {
+    private ListView mListView;
+    private View emptyView;
+    private Context mContext;
+    private String mEmptyText;
+    private TextView mTextView;
+    private ViewGroup parent;
+
+    public EmptyViewHelper(ListView listView, String text) {
+        mListView = listView;
+        mContext = listView.getContext();
+        mEmptyText = text;
+        initEmptyView();
+    }
+
+    /*  public EmptyViewHelper(ListView listView, String text, FrameLayout parent) {
+          mListView = listView;
+          mContext = listView.getContext();
+          mEmptyText = text;
+          this.parent = parent;
+          initEmptyView();
+      }
+
+      private void initEmptyView() {
+          emptyView = View.inflate(mContext, R.layout.empty_message, null);
+          FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL);
+          parent.addView(emptyView, lp);
+          mListView.setEmptyView(emptyView);
+          if (!TextUtils.isEmpty(mEmptyText)) {
+              ((TextView) emptyView.findViewById(R.id.tv_msg)).setText(mEmptyText);
+          }
+      }*/
+    public EmptyViewHelper(ListView listView, String text, ViewGroup parent) {
+        mListView = listView;
+        mContext = listView.getContext();
+        mEmptyText = text;
+        this.parent = parent;
+        initEmptyView();
+    }
+
+    public EmptyViewHelper(ListView listView, ViewGroup parent) {
+        mListView = listView;
+        mContext = listView.getContext();
+        mEmptyText = "暂无数据";
+        this.parent = parent;
+        initEmptyView();
+    }
+
+    private void initEmptyView() {
+        emptyView = View.inflate(mContext, R.layout.empty_message, null);
+        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        parent.addView(emptyView, lp);
+        mListView.setEmptyView(emptyView);
+        if (!TextUtils.isEmpty(mEmptyText)) {
+            ((TextView) emptyView.findViewById(R.id.tv_msg)).setText(mEmptyText);
+        }
+    }
+
+
+}

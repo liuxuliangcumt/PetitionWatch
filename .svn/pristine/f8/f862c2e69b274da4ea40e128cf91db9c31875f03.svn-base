@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelcounty.activity.NewMonitorTaskActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="被监控人"
+            android:textColor="@color/c6d6d6d"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_monitored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/c909090"
+            android:theme="@style/MyEdittext" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="任务标题"
+            android:textColor="@color/c6d6d6d"
+            android:textSize="16sp" />
+
+        <com.realpower.petitionwatch.view.ClearEditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/c909090"
+            android:textSize="15sp"
+            android:theme="@style/MyEdittext" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="任务内容"
+            android:textColor="@color/c6d6d6d"
+            android:textSize="16sp" />
+
+        <com.realpower.petitionwatch.view.ClearEditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/c909090"
+            android:textSize="15sp"
+            android:theme="@style/MyEdittext" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="选择起止时间"
+            android:textColor="@color/c6d6d6d"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/arrow_right"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="选择起止时间"
+            android:textColor="@color/c909090"
+            android:textSize="15sp"
+            android:theme="@style/MyEdittext" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="选择监控工作人员"
+            android:textColor="@color/c6d6d6d"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_monitor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/arrow_right"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="选择监控工作人员"
+            android:textColor="@color/c909090"
+            android:textSize="15sp"
+            android:theme="@style/MyEdittext" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="所属区域"
+            android:textColor="@color/c6d6d6d"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableRight="@drawable/arrow_right"
+            android:gravity="center_vertical"
+            android:hint="请选择"
+            android:textSize="15sp"
+            android:theme="@style/MyEdittext" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
+        android:text="确认"
+        android:textColor="@color/white" />
+</LinearLayout>

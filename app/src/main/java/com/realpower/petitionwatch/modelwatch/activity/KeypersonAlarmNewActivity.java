@@ -157,7 +157,7 @@ public class KeypersonAlarmNewActivity extends BaseActivity {
             String code = dataObject.getString("code");
             if ("1000".equals(code)) {
                 addMonitored();
-            } else if ("1001".equals(code)) {
+            } else  {
                 MyToastUtils.showToast("身份号码验证未通过");
             }
         } catch (JSONException e) {

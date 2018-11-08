@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cf5f5f5"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="人员类型"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <RadioButton
+                android:id="@+id/rb_key"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:checked="true"
+                android:text="被监控人" />
+
+            <RadioButton
+                android:id="@+id/rb_worker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="监控工作人员" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="姓     名"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <com.realpower.petitionwatch.view.ClearEditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="手机号"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <com.realpower.petitionwatch.view.ClearEditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_region"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="区域选择:"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <TextView
+                    android:id="@+id/tv_region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="请选择区域"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/iv_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="显示监控人"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <Switch
+                    android:id="@+id/s_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_search"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/bg_login_btn"
+                    android:text="开始检索"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+
+                <Button
+                    android:id="@+id/btn_location"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/bg_login_btn"
+                    android:text="查询定位"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.realpower.petitionwatch.view.CustomListView
+            android:id="@+id/lv_person"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/cf5f5f5"
+            android:dividerHeight="20dp"
+            android:padding="20dp" />
+    </LinearLayout>
+</ScrollView>

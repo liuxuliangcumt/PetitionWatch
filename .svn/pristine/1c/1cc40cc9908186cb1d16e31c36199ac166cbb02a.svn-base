@@ -1,0 +1,34 @@
+apply plugin: 'android-library'
+
+dependencies {
+}
+
+android {
+    /* compileSdkVersion 25
+     buildToolsVersion '26.0.2'
+
+     defaultConfig {
+         minSdkVersion 16
+         targetSdkVersion 22
+
+     }*/
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 27
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+        }
+
+    }
+
+}

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelcounty.activity.MonitorTaskDetailActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="33dp"
+            android:paddingTop="15dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="任务标题"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <TextView
+                android:id="@+id/tv_taskTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c808080"
+                android:textSize="@dimen/normalTextSize"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="任务说明"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c808080"
+                android:textSize="@dimen/normalTextSize"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="当前任务状态"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <TextView
+                android:id="@+id/tv_taskState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c808080"
+                android:textSize="@dimen/normalTextSize"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重点人姓名"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c808080"
+                android:textSize="@dimen/normalTextSize"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="手机号"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c808080"
+                android:textSize="@dimen/normalTextSize"
+                android:theme="@style/MyEdittext" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="身份证号"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />>
+
+            <TextView
+                android:id="@+id/tv_idCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c808080"
+                android:textSize="@dimen/normalTextSize"
+                android:theme="@style/MyEdittext" />
+
+
+            <!-- <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="15dp"
+                 android:text="重点人安全等级"
+                 android:textColor="@color/c6d6d6d"
+                 android:textSize="16sp" />
+
+             <TextView
+                 android:id="@+id/tv_safeLevel"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:textColor="@color/c909090"
+                 android:textSize="15sp"
+                 android:theme="@style/MyEdittext" />-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="监控任务时间"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c808080"
+                android:textSize="@dimen/normalTextSize"
+                android:theme="@style/MyEdittext" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="重点人所属地区"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c808080"
+                android:textSize="@dimen/normalTextSize"
+                android:theme="@style/MyEdittext" />
+
+
+            <!-- <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="15dp"
+                           android:text="重点人安全等级"
+                           android:textColor="@color/c6d6d6d"
+                           android:textSize="16sp" />
+
+                       <TextView
+                           android:id="@+id/tv_safeLevel"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:textColor="@color/c909090"
+                           android:textSize="15sp"
+                           android:theme="@style/MyEdittext" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="反馈状态来源筛选"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_spinner"
+                android:gravity="center"
+                android:spinnerMode="dropdown"></android.support.v7.widget.AppCompatSpinner>
+
+            <!--  <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="监控工作人员" />
+              </LinearLayout>-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="状态"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:divider="@color/white"></com.realpower.petitionwatch.view.CustomListView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="安全级别"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_safe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:divider="@color/white"></com.realpower.petitionwatch.view.CustomListView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="备注"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:divider="@color/white"
+                android:dividerHeight="10dp"></com.realpower.petitionwatch.view.CustomListView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="照片上传"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <com.realpower.petitionwatch.view.CustomGridVeiw
+                android:id="@+id/gv_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="2"></com.realpower.petitionwatch.view.CustomGridVeiw>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="视频上传"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"></com.realpower.petitionwatch.view.CustomListView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

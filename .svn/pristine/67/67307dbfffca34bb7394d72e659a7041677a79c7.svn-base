@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelcounty.activity.MyTaskDetailActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务时间"
+            android:textColor="@color/bigTextColor"
+            android:textSize="@dimen/bigTextSize" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="20183255"
+            android:textColor="@color/normalTextColor"
+            android:textSize="@dimen/normalTextSize"
+            android:theme="@style/MyEdittext" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务内容"
+            android:textColor="@color/bigTextColor"
+            android:textSize="@dimen/bigTextSize" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/normalTextColor"
+            android:textSize="@dimen/normalTextSize"
+            android:theme="@style/MyEdittext" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="任务领导"
+            android:textColor="@color/bigTextColor"
+            android:textSize="@dimen/bigTextSize" />
+
+        <TextView
+            android:id="@+id/tv_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/normalTextColor"
+            android:textSize="@dimen/normalTextSize"
+            android:theme="@style/MyEdittext" />
+
+    </LinearLayout>
+</LinearLayout>

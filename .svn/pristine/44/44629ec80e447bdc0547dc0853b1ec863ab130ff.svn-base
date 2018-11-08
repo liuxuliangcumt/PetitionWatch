@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.activity.StatisticalActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="诉求统计"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/bigTextSize" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_1_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/selc_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="周"
+                        android:textSize="11sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_1_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selc_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="月"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/lineChart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="意见统计"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/bigTextSize" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_2_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/selc_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="周"
+                        android:textSize="11sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_2_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selc_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="月"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="诉求种类数据"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/bigTextSize" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_3_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/selc_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="周"
+                        android:textSize="11sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_3_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selc_radio"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="月"
+                        android:textColor="@color/white"
+                        android:textSize="11sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="40dp">
+
+                <com.realpower.petitionwatch.view.CircularProgressView
+                    android:id="@+id/circular_1"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    app:progressTitle="山林土地"
+                    app:ringBGColor="@color/c50cd9cf2"
+                    app:ringColor="@color/ccd9cf2" />
+
+                <com.realpower.petitionwatch.view.CircularProgressView
+                    android:id="@+id/circular_2"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    app:ringBGColor="@color/c50fec664"
+                    app:ringColor="@color/cfec664"
+                    app:ringWidth="10dp" />
+
+                <com.realpower.petitionwatch.view.CircularProgressView
+                    android:id="@+id/circular_3"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    app:ringBGColor="@color/c50f77062"
+                    app:ringColor="@color/cf77062" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

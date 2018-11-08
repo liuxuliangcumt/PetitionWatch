@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelwatch.activity.TaskDetailActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="@dimen/pagePadding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名"
+                android:theme="@style/PageLineTitleTextView" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="张三" />
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号" />
+
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="13695258451" />
+
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="身份证号" />
+
+
+            <TextView
+                android:id="@+id/tv_idCard"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="130464822545222123258" />
+
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间" />
+
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2017年11月3日" />
+
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日反馈时间" />
+
+
+            <TextView
+                android:id="@+id/tv_timeToday"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2017年11月2日" />
+
+
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_back"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="60dp"
+                android:layout_marginTop="54dp"
+                android:background="@drawable/bg_login_btn"
+                android:gravity="center"
+                android:text="状态上报"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btnTextSize" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

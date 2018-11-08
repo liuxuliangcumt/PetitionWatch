@@ -1,0 +1,37 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="default_divider_height">1dp</dimen>
+    <dimen name="default_divider_padding">3dp</dimen>
+    <dimen name="bigTextSize">19sp</dimen>
+    <dimen name="normalTextSize">15sp</dimen>
+
+    <!--详情页-->
+    <dimen name="pageNormalTextSize">16sp</dimen><!--行标题- 行内容 -->
+
+    <!--列表item-->
+    <dimen name="listTitleTextSize">16sp</dimen><!--列表title-->
+    <dimen name="listContentTextSize">14sp</dimen><!--列表content 第二行-->
+    <dimen name="listThreeTextSize">11sp</dimen><!--列表content 第三行-->
+
+
+    <!--间距-->
+    <!--page详情页-->
+    <!--行间距4dp-->
+    <dimen name="pageLineSpace">4dp</dimen>>//默认间距加4dp
+    <!--项间距-->
+    <dimen name="pageItemSpace">15dp</dimen>
+    <!--页内边距  屏幕到内容距离-->
+    <dimen name="pagePadding">20dp</dimen>
+    <!--gridview 横纵项间距-->
+    <dimen name="gridviewSpace">10dp</dimen>
+
+    <!--item列表-->
+    <!--list item内边距-->
+    <dimen name="listPadding">15dp</dimen>
+    <!--item上下divider-->
+    <dimen name="dividerHeight">18dp</dimen>
+
+</resources>

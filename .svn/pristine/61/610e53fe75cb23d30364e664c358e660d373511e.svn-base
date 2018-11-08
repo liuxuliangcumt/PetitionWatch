@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelstaff.activity.SuggestionDetailActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/pagePadding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="意见反映编号"
+                android:theme="@style/PageLineTitleTextView" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_number"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_name"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="身份证号" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_idCard"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="户籍区域" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_location"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="联系方式" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_phone"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="催办次数及最后一次催办时间" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_urge"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="意见详情" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_detail"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/tv_picname"
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="意见照片" />
+
+
+            <com.realpower.petitionwatch.view.CustomGridVeiw
+                android:id="@+id/gv_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:horizontalSpacing="@dimen/horizontalSpacing"
+                android:listSelector="@color/transparent"
+                android:numColumns="4"
+                android:verticalSpacing="@dimen/verticalSpacing" />
+
+            <TextView
+                android:id="@+id/tv_videoname"
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="意见视频" />
+
+
+            <com.realpower.petitionwatch.view.CustomGridVeiw
+                android:id="@+id/lv_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:horizontalSpacing="@dimen/horizontalSpacing"
+                android:listSelector="@color/transparent"
+                android:numColumns="4"
+                android:verticalSpacing="@dimen/verticalSpacing" />/>
+
+            <TextView
+                android:id="@+id/tv_voicename"
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="意见语音"
+                android:visibility="gone" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_voice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_resultName"
+                style="@style/PageLineTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="处理结果" />
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_result"
+                style="@style/PageLineContentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_acount"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="45dp"
+                android:layout_marginTop="75dp"
+                android:background="@drawable/bg_login_btn"
+                android:gravity="center"
+                android:text="开始处理"
+                android:textColor="@color/white"
+                android:textSize="@dimen/btnTextSize" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

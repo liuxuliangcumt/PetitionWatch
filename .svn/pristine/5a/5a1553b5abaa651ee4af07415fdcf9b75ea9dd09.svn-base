@@ -1,0 +1,47 @@
+package com.realpower.petitionwatch.activity;
+
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
+import android.widget.MediaController;
+import android.widget.VideoView;
+
+import com.liulishuo.filedownloader.BaseDownloadTask;
+import com.liulishuo.filedownloader.FileDownloadListener;
+import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.util.FileDownloadUtils;
+import com.realpower.petitionwatch.R;
+import com.tencent.liteav.demo.play.SuperPlayerModel;
+import com.tencent.liteav.demo.play.SuperPlayerView;
+
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.ViewById;
+
+import java.io.File;
+
+@EActivity
+public class VideoPlayActivity extends BaseActivity {
+
+    @Extra
+    String path;
+    SuperPlayerView superPlayerView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_video_play);
+        superPlayerView = findViewById(R.id.superPlayerView);
+        SuperPlayerModel model = new SuperPlayerModel();
+        model.videoURL = path;
+        superPlayerView.playWithMode(model);
+
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putBoolean("isPort", true);
+    }
+}

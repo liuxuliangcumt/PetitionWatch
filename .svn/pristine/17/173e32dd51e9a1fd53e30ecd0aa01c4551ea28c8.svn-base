@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.realpower.petitionwatch">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- <uses-permission android:name="android.permission.GET_TASKS" /> -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <!-- 这个权限用于进行网络定位 -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
+    <!-- 这个权限用于访问GPS定位 -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <permission
+        android:name="com.realpower.petitionwatch.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+    <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
+    <uses-permission android:name="com.realpower.petitionwatch.permission.MIPUSH_RECEIVE" />
+
+    <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/LoginTheme"
+        tools:replace="android:icon, android:label,android:theme">
+        <activity
+            android:name=".activity.MainActivity_"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.LoginActivity_">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="applicationId.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".activity.BaseActivity_"
+            android:screenOrientation="portrait" />
+        <!-- 监控人员模块 -->
+        <activity
+            android:name=".modelwatch.activity.WatchMainActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelwatch.activity.TaskDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.KeypersonNewActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ResetPhoneActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ResetPasswordActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelwatch.activity.TaskBackActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.KeypersonEditActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelwatch.activity.ChoosePersonActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelwatch.activity.TaskSearchActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelwatch.activity.TaskSearchDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelwatch.activity.KeypersonAlarmNewActivity_"
+            android:screenOrientation="portrait" />
+        <!-- 百度地图所需的service -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="AlEW34GakZaQcPNRwS3bH4SRpoxwcKwS" />
+
+        <service
+            android:name=".server.LocationServer"
+            android:exported="true"
+            android:process=":remote" />
+        <service
+            android:name=".server.LocationServerAlive"
+            android:exported="true"
+            android:process=":remote" />
+        <!-- 工作人员 -->
+        <activity
+            android:name=".modelstaff.activity.StaffMainActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelstaff.activity.PetitionDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelstaff.activity.SuggestionDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.CountyMainActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.AutoAlarmDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.AlarmDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.TrackListActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.VideoPlayActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.KeyPersonDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.MonitorTaskDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.CountySetActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.MyTaskActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcounty.activity.MyTaskDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.TrackActivity_" />
+        <activity
+            android:name=".modelcounty.activity.NewMonitorTaskActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcity.activity.CityMainActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcity.activity.CityAutoAlarmDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcity.activity.CityAlarmDetailActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcity.activity.CityAddTaskActivity_"
+            android:screenOrientation="portrait" />
+
+        <!-- 【必须】消息收发service -->
+        <service
+            android:name="com.tencent.qalsdk.service.QalService"
+            android:exported="true"
+            android:process=":QALSERVICE" />
+        <service
+            android:name="com.tencent.qalsdk.service.QalAssistService"
+            android:exported="false"
+            android:process=":QALSERVICE" />
+
+        <!-- 【必须】 离线消息广播接收器 -->
+        <receiver
+            android:name="com.tencent.qalsdk.QALBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.tencent.qalsdk.broadcast.qal" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.tencent.qalsdk.core.NetConnInfoCenter"
+            android:process=":QALSERVICE">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+
+            <!-- ImSDK 3.0.2 后添加 -->
+            <intent-filter>
+                <action android:name="com.tencent.qalsdk.service.TASK_REMOVED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 推送服务需要配置的service和receiver -->
+        <service
+            android:name="com.xiaomi.push.service.XMPushService"
+            android:enabled="true"
+            android:process=":pushservice" />
+        <service
+            android:name="com.xiaomi.push.service.XMJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":pushservice" />
+        <!-- 注：此service必须在3.0.1版本以后（包括3.0.1版本）加入 -->
+        <service
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService"
+            android:enabled="true" /> <!-- 注：此service必须在2.2.5版本以后（包括2.2.5版本）加入 -->
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.xiaomi.push.service.receivers.PingReceiver"
+            android:exported="false"
+            android:process=":pushservice">
+            <intent-filter>
+                <action android:name="com.xiaomi.push.PING_TIMER" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".broadcastreceiver.MIMessageReceiver"
+            android:exported="true">
+
+            <!-- 这里com.xiaomi.mipushdemo.DemoMessageRreceiver改成app中定义的完整类名 -->
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mipush.ERROR" />
+            </intent-filter>
+        </receiver>
+        <!-- sb华为推送 -->
+        <receiver android:name="xxx.xx.xx">
+            <intent-filter>
+                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
+                <action android:name="com.huawei.android.push.intent.RECEIVE" />
+                <action android:name="com.huawei.android.push.intent.CLICK" />
+                <action android:name="com.huawei.intent.action.PUSH_STATE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.huawei.hms.support.api.push.PushEventReceiver">
+            <intent-filter>
+                <action android:name="com.huawei.intent.action.PUSH" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".modelstaff.activity.PetitionActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelstaff.activity.SuggestionActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CamerasActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ContactDetailActivity_"
+            android:screenOrientation="portrait" />
+        <!-- <activity android:name=".activity.LoginActivity_" />-->
+        <activity
+            android:name=".modelcounty.activity.ManagerActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelcity.activity.CityTaskActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.KeypersonActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modelwatch.activity.TaskActivity_"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chatui.actvity.ChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CamerasLiveActivity_"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.ContactsActivity_"
+            android:screenOrientation="portrait"></activity>
+    </application>
+
+</manifest>

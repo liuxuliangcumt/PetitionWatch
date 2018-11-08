@@ -22,6 +22,7 @@ import com.realpower.petitionwatch.net.param.LoginParam;
 import com.realpower.petitionwatch.net.result.ContactResult;
 import com.realpower.petitionwatch.net.result.LoginResult;
 import com.realpower.petitionwatch.util.MyToastUtils;
+import com.realpower.petitionwatch.util.PermissionUtils;
 import com.realpower.petitionwatch.util.SharedPreferencesHelper;
 import com.realpower.petitionwatch.util.SystemInfoUtils;
 import com.realpower.petitionwatch.view.ClearEditText;
@@ -39,6 +40,7 @@ import org.androidannotations.annotations.ViewById;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.FormatterClosedException;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +55,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @EActivity
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements PermissionUtils.PermissionGrant {
     @ViewById(R.id.et_account)
     ClearEditText et_account;
     @ViewById(R.id.et_password)
@@ -73,17 +75,17 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         et_account.setText(myPrefs.username().get());
-       et_password.setText(myPrefs.password().get());
+        et_password.setText(myPrefs.password().get());
         if (myPrefs.isShowAlive().get().length() <= 1) {
             IntentWrapper.whiteListMatters(this, "及时收到推送消息");
             myPrefs.isShowAlive().put("add");
         }
-        FriendshipInfo.getInstance();
+       // FriendshipInfo.getInstance();
     }
 
     private int isXian = 0;
 
-    @Click({R.id.btn_login, R.id.tv_password, R.id.btn_register})
+    @Click({R.id.btn_login, R.id.tv_password, R.id.btn_change, R.id.btn_register})
     void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
@@ -94,6 +96,7 @@ public class LoginActivity extends BaseActivity {
                 ResetPasswordActivity_.intent(this).start();
                 break;
             case R.id.btn_register:
+                Log.e("aaa", "当前毫秒值  " + System.currentTimeMillis());
                 et_password.setText("123456");
                 switch (isXian % 4) {
                     case 0:
@@ -101,7 +104,7 @@ public class LoginActivity extends BaseActivity {
                         MyToastUtils.showToast("县领导");
                         break;
                     case 1:
-                        et_account.setText("13230959185");
+                        et_account.setText("18031970629");
                         MyToastUtils.showToast("工作人员");
                         break;
                     case 2:
@@ -116,7 +119,26 @@ public class LoginActivity extends BaseActivity {
                 isXian++;
 
                 break;
+            case R.id.btn_change:
+                changBaseUrl();
+                break;
         }
+    }
+
+    boolean baseUrl;
+
+    private void changBaseUrl() {
+        if (baseUrl) {
+            baseUrl = false;
+            MyToastUtils.showToast("北京");
+            Mate.API = "http://123.127.244.23:8083/";
+        } else {
+            baseUrl = true;
+            MyToastUtils.showToast("邢台");
+            Mate.API = "http://222.223.123.207:8082";
+        }
+        changClient();
+
     }
 
     private void login() {
@@ -131,7 +153,7 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         showMyDialog("正在登录");
-        Call<LoginResult> call = apiService.login(new LoginParam(account, password));
+        Call<LoginResult> call = apiService.login(new LoginParam(account, password, 2));
         call.enqueue(new Callback<LoginResult>() {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
@@ -236,11 +258,18 @@ public class LoginActivity extends BaseActivity {
     private void setData(List<ContactBean> message) {
         Map<String, List<FriendProfile>> friends = new HashMap<>();
         for (ContactBean bean : message) {
+            if (bean.getSysUser().getMobilePhone().equals(myPrefs.username().get())) {
+                myPrefs.name().put(bean.getSysUser().getNickname());
+            }
             FriendProfile profile = new FriendProfile(bean.getSysUser().getNickname(), bean.getTxAccount());
             List<FriendProfile> profileList = new ArrayList<>();
             profileList.add(profile);
             friends.put(bean.getTxAccount(), profileList);
+
+
         }
+
+
         FriendshipInfo.getInstance().setFriends(friends);
     }
 
@@ -287,5 +316,23 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         super.onBackPressed();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_ACCESS_FINE_LOCATION, this);
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_CAMERA, this);
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_WRITE_EXTERNAL_STORAGE, this);
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_READ_EXTERNAL_STORAGE, this);
+        PermissionUtils.requestPermission(this, PermissionUtils.CODE_READ_PHONE_STATE, this);
+
+
+        //    PermissionUtils.getNoGrantedPermission(this, false);CODE_WRITE_EXTERNAL_STORAGE
+    }
+
+    @Override
+    public void onPermissionGranted(int requestCode) {
+        Log.e("aaa", "onPermissionGranted:   " + requestCode);
     }
 }

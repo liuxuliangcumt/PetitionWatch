@@ -1,0 +1,135 @@
+package com.realpower.petitionwatch.modelcounty.activity;
+
+import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.modelcounty.adapter.AlarmListAdapter;
+import com.realpower.petitionwatch.modelcounty.adapter.MonitoreTaskAdapter;
+import com.realpower.petitionwatch.modelcounty.bean.AlarmBean;
+import com.realpower.petitionwatch.modelcounty.bean.MonitorTaskBean;
+import com.realpower.petitionwatch.modelcounty.fragment.MonitorTasksFragment;
+import com.realpower.petitionwatch.modelcounty.fragment.MonitorTasksFragment_;
+import com.realpower.petitionwatch.modelcounty.fragment.MonitorTasksFragment;
+import com.realpower.petitionwatch.net.MyCallback;
+import com.realpower.petitionwatch.net.param.AlarmAllParam;
+import com.realpower.petitionwatch.net.param.PagingParam;
+import com.realpower.petitionwatch.net.result.AlarmListResult;
+import com.realpower.petitionwatch.net.result.MonitorTaskResult;
+import com.realpower.petitionwatch.util.EmptyViewHelper;
+import com.realpower.petitionwatch.util.MyToastUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+
+@EActivity
+public class MonitorTasksActivity extends BaseActivity {
+
+    @ViewById
+    ListView lv_task;
+    MonitoreTaskAdapter adapter;
+    private List<MonitorTaskBean.ListBean> data;
+    @ViewById
+    SmartRefreshLayout refreshLayout;
+    private int page = 1;
+    private boolean isFristPage, isLastPage;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_monitor_tasks);
+        setTitleName("监控任务");
+
+        View headview = View.inflate(this, R.layout.listview_headview, null);
+        data = new ArrayList<>();
+        adapter = new MonitoreTaskAdapter(this, data);
+        lv_task.setAdapter(adapter);
+        EmptyViewHelper emptyViewHelper = new EmptyViewHelper(lv_task, "暂无数据", (FrameLayout) findViewById(R.id.parent));
+        lv_task.addFooterView(headview);
+        lv_task.addFooterView(headview);
+        lv_task.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MonitorTaskDetailActivity_.intent(MonitorTasksActivity.this).taskId(data.get(position).getTaskId()).start();
+            }
+        });
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                data.clear();
+                page = 1;
+                getData(page);
+                refreshLayout.finishRefresh(1000);
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+
+                if (!isLastPage) {
+                    page++;
+                    getData(page);
+                    refreshLayout.finishLoadMore(1000);
+                } else {
+                    MyToastUtils.showToast("没有更多了");
+                    refreshLayout.finishLoadMore();
+                }
+            }
+        });
+        getData(1);
+    }
+
+    private void getData(int page) {
+        Call<MonitorTaskResult> call = apiService.taskAll(new PagingParam(page + ""));
+        call.enqueue(new MyCallback<MonitorTaskResult>() {
+            @Override
+            public void onSuccessRequest(MonitorTaskResult result) {
+                if ("1".equals(result.getStatus())) {
+                    setTaskListData(result.getMessage());
+                }
+            }
+
+            @Override
+            public void afterRequest() {
+
+            }
+
+            @Override
+            public void onFailureRequest(Call<MonitorTaskResult> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void setTaskListData(MonitorTaskBean message) {
+        isFristPage = message.isIsFirstPage();
+        isLastPage = message.isIsLastPage();
+        refreshLayout.setEnableLoadMore(!isLastPage);
+        data.addAll(message.getList());
+        adapter.notifyDataSetChanged();
+    }
+
+
+}

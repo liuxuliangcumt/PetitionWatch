@@ -1,0 +1,92 @@
+package com.realpower.petitionwatch.modelcounty.activity;
+
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CompoundButton;
+import android.widget.ListView;
+import android.widget.RadioButton;
+
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.modelcounty.adapter.ManagerMonitorAdapter;
+import com.realpower.petitionwatch.modelcounty.adapter.ManagerSupervisorAdapter;
+import com.realpower.petitionwatch.modelcounty.bean.MonitoredBean;
+import com.realpower.petitionwatch.modelcounty.bean.SupervisorBean;
+import com.realpower.petitionwatch.modelcounty.fragment.KeyPersonsFragment;
+import com.realpower.petitionwatch.modelcounty.fragment.KeyPersonsFragment_;
+import com.realpower.petitionwatch.modelcounty.fragment.MonitorFragment;
+import com.realpower.petitionwatch.modelcounty.fragment.MonitorFragment_;
+import com.realpower.petitionwatch.net.MyCallback;
+import com.realpower.petitionwatch.net.param.PagingParam;
+import com.realpower.petitionwatch.net.result.CountyMonitoredsResult;
+import com.realpower.petitionwatch.net.result.SupervisorResult;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+
+@EActivity
+public class ManagerActivity extends BaseActivity {
+    private PagerAdapter pagerAdapter;
+    @ViewById
+    TabLayout tl_suggest;
+
+    @ViewById
+    ViewPager vp_petition;
+    private List<String> titleData;
+    KeyPersonsFragment keyPersonsFragment;
+    MonitorFragment monitorFragment;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_manager);
+        setTitleName("人员管理");
+        titleData = new ArrayList<>();
+        titleData.add("重点人");
+        titleData.add("监控人员");
+        keyPersonsFragment = KeyPersonsFragment_.builder().build();
+        monitorFragment = MonitorFragment_.builder().build();
+        pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public int getCount() {
+                return 2;
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                if (position == 0) {
+                    return keyPersonsFragment;
+                } else {
+                    return monitorFragment;
+                }
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titleData.get(position);
+
+            }
+        };
+
+        vp_petition.setAdapter(pagerAdapter);
+        tl_suggest.setupWithViewPager(vp_petition);
+        tl_suggest.setTabMode(TabLayout.MODE_FIXED);
+        tl_suggest.setTabsFromPagerAdapter(pagerAdapter);
+
+    }
+
+
+}

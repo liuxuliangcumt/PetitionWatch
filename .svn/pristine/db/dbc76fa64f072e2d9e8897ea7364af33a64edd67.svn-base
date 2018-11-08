@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.activity.KeypersonEditActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/cF5F5F5"
+                android:paddingLeft="20dp"
+                android:paddingTop="12dp"
+                android:text="重点人基本信息"
+                android:textColor="@color/cb3b3b3"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="姓名"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="身份证号"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <TextView
+                    android:id="@+id/tv_idCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="手机号"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_address"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="所在地区"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/cF5F5F5"
+                android:paddingLeft="20dp"
+                android:paddingTop="12dp"
+                android:text="补充信息"
+                android:textColor="@color/cb3b3b3"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="车辆型号"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <com.realpower.petitionwatch.view.ClearEditText
+                    android:id="@+id/et_carType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="暂无"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="车辆牌号"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <com.realpower.petitionwatch.view.ClearEditText
+                    android:id="@+id/et_carNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="暂无"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="wrap_content"
+                    android:text="车辆颜色"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <com.realpower.petitionwatch.view.ClearEditText
+                    android:id="@+id/et_carColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="暂无"
+                    android:textColor="@color/normalTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:layout_width="85dp"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:text="照片"
+                    android:textColor="@color/bigTextColor"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <com.realpower.petitionwatch.view.CustomGridVeiw
+                    android:id="@+id/GV_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:listSelector="@color/transparent"
+                    android:numColumns="2"
+                    android:verticalSpacing="8dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="详细地址"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <com.realpower.petitionwatch.view.ClearEditText
+                android:id="@+id/et_addressDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c909090"
+                android:textSize="15sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_picLoad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="照片上传"
+                android:textColor="@color/c6d6d6d"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_kins"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/cF5F5F5"
+                android:paddingLeft="20dp"
+                android:paddingTop="12dp"
+                android:text="亲属信息"
+                android:textColor="@color/cb3b3b3"
+                android:textSize="13sp" />
+
+            <com.realpower.petitionwatch.view.CustomGridVeiw
+                android:id="@+id/GV_kins"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:horizontalSpacing="15dp"
+                android:numColumns="4"
+                android:scrollbars="none"
+                android:verticalSpacing="8dp" />
+
+
+            <!-- <LinearLayout
+                 android:id="@+id/ll_addkins"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="15dp"
+                 android:gravity="center_vertical"
+                 android:orientation="horizontal"
+                 android:visibility="gone">
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="10dp"
+                     android:layout_marginRight="15dp"
+                     android:gravity="center"
+                     android:text="添加亲属"
+                     android:textColor="@color/colorPrimary" />
+
+                 <ImageView
+                     android:layout_width="26dp"
+                     android:layout_height="26dp"
+                     android:src="@drawable/add_kins" />
+             </LinearLayout>-->
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_edit"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="75dp"
+                android:layout_marginTop="95dp"
+                android:background="@drawable/bg_btn_ce59c0e"
+                android:gravity="center"
+                android:text="信息修改"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:theme="@style/MyButten_Borderless" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

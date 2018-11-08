@@ -1,0 +1,104 @@
+package com.realpower.petitionwatch.modelwatch.activity;
+
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
+
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.modelwatch.fragment.TaskSearchFragment;
+import com.realpower.petitionwatch.modelwatch.fragment.TaskSearchFragment_;
+
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@EActivity
+public class TaskSearchActivity extends BaseActivity {
+    private PagerAdapter pagerAdapter;
+    @ViewById
+    TabLayout tl_petition;
+
+    @ViewById
+    ViewPager vp_petition;
+
+    @ViewById
+    EditText et_search;
+
+    TaskSearchFragment taskSearchFragment1;
+    TaskSearchFragment taskSearchFragment2;
+    TaskSearchFragment taskSearchFragment3;
+    private List<String> titleData;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_task);
+        setTitleName("查询个人任务");
+        titleData = new ArrayList<>();
+        titleData.add("全部");
+        titleData.add("进行中");
+        titleData.add("已完成");
+        taskSearchFragment1 = TaskSearchFragment_.builder().build();
+        taskSearchFragment2 = TaskSearchFragment_.builder().build();
+        taskSearchFragment3 = TaskSearchFragment_.builder().build();
+        taskSearchFragment1.setCategory(0);
+        taskSearchFragment2.setCategory(1);
+        taskSearchFragment3.setCategory(2);
+        pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public int getCount() {
+                return 3;
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                if (position == 0) {
+                    return taskSearchFragment1;
+                } else if (position == 1) {
+                    return taskSearchFragment2;
+                } else {
+                    return taskSearchFragment3;
+                }
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return titleData.get(position);
+
+            }
+
+
+        };
+        vp_petition.setAdapter(pagerAdapter);
+        tl_petition.setupWithViewPager(vp_petition);
+        tl_petition.setTabMode(TabLayout.MODE_FIXED);
+        tl_petition.setTabsFromPagerAdapter(pagerAdapter);
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                vp_petition.setCurrentItem(0);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                taskSearchFragment1.getData(et_search.getText().toString());
+            }
+        });
+    }
+
+
+}

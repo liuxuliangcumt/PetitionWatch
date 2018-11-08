@@ -1,0 +1,66 @@
+package com.realpower.petitionwatch.modelstaff.fragment;
+
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.activity.LoginActivity_;
+import com.realpower.petitionwatch.activity.ResetPasswordActivity_;
+import com.realpower.petitionwatch.activity.ResetPhoneActivity_;
+import com.realpower.petitionwatch.fragment.BaseFragment;
+import com.realpower.petitionwatch.util.MyToastUtils;
+import com.realpower.petitionwatch.util.SystemInfoUtils;
+import com.realpower.petitionwatch.view.CustomDialog;
+import com.realpower.petitionwatch.modelwatch.activity.TaskSearchActivity_;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
+
+/**
+ * Created by Administrator on 2017/11/9.
+ */
+@EFragment(R.layout.fragment_me)
+public class StaffMeFragment extends BaseFragment {
+
+
+    @AfterViews
+    void initViews() {
+        setTitleName("我的");
+
+    }
+
+    @Click({R.id.ll_phone, R.id.ll_password, R.id.btn_out})
+    void onViewClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.ll_phone:
+                ResetPhoneActivity_.intent(getContext()).start();
+                break;
+
+            case R.id.ll_password:
+                ResetPasswordActivity_.intent(getActivity()).isLogin(true).start();
+                break;
+            case R.id.btn_out:
+                LoginActivity_.intent(getActivity()).start();
+                getActivity().finish();
+                break;
+        }
+    }
+
+    private void showUpdateDailog() {
+        CustomDialog dialog = new CustomDialog(getActivity(), R.style.customDialog, R.layout.dialog_version_update);
+        dialog.show();
+        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        layoutParams.width = (int) (SystemInfoUtils.getWindowsWidth(getActivity()) * 0.80);
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(layoutParams);
+
+    }
+}

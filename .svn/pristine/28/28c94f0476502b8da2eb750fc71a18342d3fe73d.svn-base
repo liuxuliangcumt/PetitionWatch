@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelwatch.activity.TaskBackActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="33dp"
+            android:paddingRight="33dp"
+            android:paddingTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/normalTextColor"
+                android:textSize="@dimen/normalTextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="状态"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+
+            <Spinner
+                android:id="@+id/sp_state"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:dropDownVerticalOffset="38dp"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="安全级别"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <Spinner
+                android:id="@+id/sp_safe"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:dropDownVerticalOffset="38dp"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="备注"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <com.realpower.petitionwatch.view.ClearEditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="200"
+                android:textColor="@color/normalTextColor"
+                android:textSize="@dimen/normalTextSize" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="上传图片"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <com.realpower.petitionwatch.view.CustomGridVeiw
+                android:id="@+id/GV_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:numColumns="3"
+                android:paddingBottom="20dp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_pic"
+                android:layout_width="112dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:text="点击上传"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:theme="@style/MyButten_Borderless" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:text="上传视频"
+                android:textColor="@color/bigTextColor"
+                android:textSize="@dimen/bigTextSize" />
+
+            <com.realpower.petitionwatch.view.CustomListView
+                android:id="@+id/lv_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.realpower.petitionwatch.view.CustomListView>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_video"
+                android:layout_width="112dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:text="点击上传"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:theme="@style/MyButten_Borderless" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="45dp"
+                android:layout_marginTop="75dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_end"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="35dp"
+                    android:background="@drawable/bg_login_btn"
+                    android:gravity="center"
+                    android:text="结束任务"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/bigTextSize"
+                    android:theme="@style/MyYellowButton" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_start"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/bg_login_btn"
+                    android:gravity="center"
+                    android:text="开始反馈"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/bigTextSize"
+                    android:theme="@style/MyYellowButton" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

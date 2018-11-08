@@ -1,0 +1,61 @@
+package com.realpower.petitionwatch.modelcounty.adapter;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.realpower.petitionwatch.R;
+import com.realpower.petitionwatch.adapter.MyBaseAdapter;
+import com.realpower.petitionwatch.modelcounty.bean.MonitorTaskBean;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2018/2/1.
+ */
+
+public class MonitoreTaskAdapter extends MyBaseAdapter<MonitorTaskBean.ListBean> {
+
+    public MonitoreTaskAdapter(Context context, List<MonitorTaskBean.ListBean> data) {
+        super(context, data);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
+        if (convertView == null) {
+            convertView = View.inflate(context, R.layout.item_listview_assign_task, null);
+            holder = new ViewHolder();
+            holder.name = (TextView) convertView.findViewById(R.id.tv_name);
+            holder.time = (TextView) convertView.findViewById(R.id.tv_time);
+            // holder.tv_category = (TextView) convertView.findViewById(R.id.tv_category);
+            holder.iv_state = (ImageView) convertView.findViewById(R.id.iv_state);
+            holder.tv_state = (TextView) convertView.findViewById(R.id.tv_state);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.name.setText(data.get(position).getMonitored().getMonitoredRealname()
+                + "--------" + data.get(position).getTaskSuperName());
+        holder.time.setText(data.get(position).getStarttime().substring(0, 10) + data.get(position).getEndtime().substring(0, 10));
+        if (data.get(position).getStatus() == 1) {//进行中
+            holder.tv_state.setText("监控中");
+            holder.tv_state.setTextColor(context.getResources().getColor(R.color.cdb0000));
+            holder.iv_state.setImageDrawable(context.getResources().getDrawable(R.drawable.in_monitor));
+        } else {
+            holder.tv_state.setText("监控结束");
+            holder.iv_state.setImageDrawable(context.getResources().getDrawable(R.drawable.monitor_end));
+            holder.tv_state.setTextColor(context.getResources().getColor(R.color.c2A97E6));
+        }
+
+        //  holder.tv_category.setText(data.get(position).get);
+        return convertView;
+    }
+
+    private class ViewHolder {
+        TextView name, time, tv_category, tv_state;
+        ImageView iv_state;
+    }
+}

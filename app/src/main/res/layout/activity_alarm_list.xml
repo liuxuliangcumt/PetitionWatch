@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.modelcounty.activity.AlarmListActivity">
+
+    <include layout="@layout/activitytitle_common" />
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_suggest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_search"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:paddingBottom="10dp"
+        android:scrollIndicators="right"
+        app:tabBackground="@android:color/transparent"
+        app:tabIndicatorColor="@color/cf5f5f5"
+        app:tabSelectedTextColor="@color/c333333"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabTextColor="@color/ca4a4a4" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_petition"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

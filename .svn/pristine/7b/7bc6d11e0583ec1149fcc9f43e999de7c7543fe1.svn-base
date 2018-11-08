@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--  <LinearLayout
+              android:id="@+id/ll_camera"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <ImageView
+                  android:layout_width="45dp"
+                  android:layout_height="45dp"
+                  android:src="@drawable/camera_main" />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dp"
+                  android:text="查看监控"
+                  android:textColor="@color/c323232"
+                  android:textSize="14sp" />
+          </LinearLayout>-->
+
+        <!--  <LinearLayout
+              android:id="@+id/ll_task"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:gravity="center"
+              android:orientation="vertical">
+
+              <ImageView
+                  android:layout_width="45dp"
+                  android:layout_height="45dp"
+                  android:src="@drawable/main_task_c" />
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dp"
+                  android:text="我的任务"
+                  android:textColor="@color/c323232"
+                  android:textSize="14sp" />
+          </LinearLayout>-->
+
+        <TextView
+            android:id="@+id/tv_task"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@mipmap/task_icon"
+            android:gravity="center"
+            android:text="我的任务"
+            android:textColor="@color/c808080"
+            android:textSize="12sp" />
+        <!-- <LinearLayout
+                     android:id="@+id/ll_key"
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:gravity="center"
+                     android:orientation="vertical">
+
+                     <ImageView
+                         android:layout_width="45dp"
+                         android:layout_height="45dp"
+                         android:src="@drawable/main_key_c" />
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="5dp"
+                         android:text="重点人"
+                         android:textColor="@color/c323232"
+                         android:textSize="14sp" />
+                 </LinearLayout>-->
+
+        <TextView
+            android:id="@+id/tv_key"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@mipmap/important_person_icon"
+            android:gravity="center"
+            android:text="重点人"
+            android:textColor="@color/c808080"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_alarm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@mipmap/give_an_alarml_icon"
+            android:gravity="center"
+            android:text="报警"
+            android:textColor="@color/c808080"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_addressBook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@mipmap/address_book_icon"
+            android:gravity="center"
+            android:text="通讯录"
+            android:textColor="@color/c808080"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_cha"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="80dp"
+        android:background="@color/white"
+        android:scaleType="centerInside"
+        android:src="@mipmap/del_icon" />
+
+</LinearLayout>

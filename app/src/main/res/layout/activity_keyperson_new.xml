@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.realpower.petitionwatch.modelwatch.activity.KeypersonNewActivity">
+    tools:context="com.realpower.petitionwatch.activity.KeypersonNewActivity">
 
     <include layout="@layout/activitytitle_common" />
 
@@ -16,90 +16,91 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:paddingLeft="33dp"
-            android:paddingRight="33dp"
-            android:paddingTop="15dp">
+            android:padding="@dimen/pagePadding">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="姓名"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:theme="@style/PageLineTitleTextView" />
 
             <com.realpower.petitionwatch.view.ClearEditText
                 android:id="@+id/et_name"
+                style="@style/PageLineContentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="15" />
 
+
             <TextView
+                style="@style/PageLineTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="身份证号"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:text="身份证号" />
 
             <com.realpower.petitionwatch.view.ClearEditText
                 android:id="@+id/et_idCard"
+                style="@style/PageLineContentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:digits="0123456789xX"
                 android:maxLength="18" />
 
             <TextView
+                style="@style/PageLineTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="手机号"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:text="手机号" />
+
 
             <com.realpower.petitionwatch.view.ClearEditText
                 android:id="@+id/et_phone"
+                style="@style/PageLineContentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:maxLength="11" />
 
             <TextView
+                style="@style/PageLineTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="车辆型号"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:text="车辆型号" />
+
 
             <com.realpower.petitionwatch.view.ClearEditText
                 android:id="@+id/et_carType"
+                style="@style/PageLineContentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
+                style="@style/PageLineTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="车辆牌号"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:text="车辆牌号" />
+
 
             <com.realpower.petitionwatch.view.ClearEditText
                 android:id="@+id/et_carNum"
+                style="@style/PageLineContentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
+                style="@style/PageLineTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="车辆颜色"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:text="车辆颜色" />
+
 
             <com.realpower.petitionwatch.view.ClearEditText
                 android:id="@+id/et_carColor"
+                style="@style/PageLineContentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -110,53 +111,52 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/PageLineTitleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="所在地区"
-                    android:textColor="@color/c6d6d6d"
-                    android:textSize="16sp" />
+                    android:text="所在地区" />
+
 
                 <TextView
                     android:id="@+id/tv_address"
+                    style="@style/PageLineContentTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
-                    android:focusable="false"
-                    android:theme="@style/MyEdittext" />
+                    android:focusable="false" />
             </LinearLayout>
 
 
             <TextView
+                style="@style/PageLineTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="详细地址"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:text="详细地址" />
+
 
             <com.realpower.petitionwatch.view.ClearEditText
                 android:id="@+id/et_addressDetail"
+                style="@style/PageLineContentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
+                style="@style/PageLineTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="照片上传"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:text="照片上传" />
+
 
             <com.realpower.petitionwatch.view.CustomGridVeiw
                 android:id="@+id/GV_pic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="13dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:horizontalSpacing="10dp"
-                android:numColumns="2"
-                android:verticalSpacing="8dp"></com.realpower.petitionwatch.view.CustomGridVeiw>
+                android:listSelector="@color/transparent"
+                android:numColumns="4"
+                android:verticalSpacing="10dp" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_pic"
@@ -166,20 +166,21 @@
                 android:text="点击上传"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:theme="@style/MyButten_Borderless" />
 
             <TextView
+                style="@style/PageLineTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="亲属信息"
-                android:textColor="@color/c6d6d6d"
-                android:textSize="16sp" />
+                android:text="亲属信息" />
+
 
             <com.realpower.petitionwatch.view.CustomListView
                 android:id="@+id/lv_kins"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.realpower.petitionwatch.view.CustomListView>
+                android:layout_height="wrap_content"
+                android:listSelector="@color/transparent" />
 
             <LinearLayout
                 android:id="@+id/ll_addkins"
@@ -198,24 +199,13 @@
                     android:text="添加亲属"
                     android:textColor="@color/colorPrimary" />
 
-                <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/add_kins" />
+
             </LinearLayout>
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_ok"
-                android:layout_width="112dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="75dp"
-                android:layout_marginTop="95dp"
-                android:gravity="center"
-                android:text="确认添加"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:theme="@style/MyButten_Borderless" />
+                style="@style/normalBtn"
+                android:text="确认添加" />
 
         </LinearLayout>
     </ScrollView>

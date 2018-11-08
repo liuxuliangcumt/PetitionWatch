@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_round_white"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:gravity="top"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp"
+    android:paddingTop="20dp">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="50dp"
+        android:maxLines="2"
+        android:text="标题阿斯蒂芬"
+        android:textColor="@color/bigTextColor"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:maxLines="2"
+        android:text="标题阿斯蒂芬"
+        android:textColor="@color/normalTextColor"
+        android:textSize="12sp" />
+
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:text="2017年12月21日"
+        android:textColor="@color/normalTextColor"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/btn_deel"
+        android:layout_width="100dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_login_btn"
+        android:text="处理意见"
+        android:textColor="@color/white" />
+
+</LinearLayout>

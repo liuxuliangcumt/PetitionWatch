@@ -10,10 +10,6 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 
-/**
- * Created by Administrator on 2017/12/8.
- */
-
 public class IdCardVerifyUtil {
 
     private final static String mall_id = "111058";

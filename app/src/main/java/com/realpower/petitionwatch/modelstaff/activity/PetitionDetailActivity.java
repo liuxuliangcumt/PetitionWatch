@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
+import com.luck.picture.lib.entity.LocalMedia;
 import com.realpower.petitionwatch.R;
 import com.realpower.petitionwatch.activity.BaseActivity;
+import com.realpower.petitionwatch.activity.ImageVideoActivity_;
 import com.realpower.petitionwatch.activity.VideoPlayActivity_;
-import com.realpower.petitionwatch.modelcounty.activity.AlarmDetailActivity;
+import com.realpower.petitionwatch.bean.MyLocalMedia;
+import com.realpower.petitionwatch.modelwatch.adapter.PicAdapter;
 import com.realpower.petitionwatch.modelwatch.listtener.VoicePlayClickListener;
 import com.realpower.petitionwatch.net.Mate;
 import com.realpower.petitionwatch.net.MyCallback;
@@ -22,7 +25,6 @@ import com.realpower.petitionwatch.modelstaff.bean.PetitionDetailBean;
 import com.realpower.petitionwatch.util.MyToastUtils;
 import com.realpower.petitionwatch.view.CustomGridVeiw;
 import com.realpower.petitionwatch.view.CustomListView;
-import com.realpower.petitionwatch.modelwatch.adapter.PicAdapter;
 import com.realpower.petitionwatch.modelwatch.adapter.VideoAdapter;
 import com.realpower.petitionwatch.modelwatch.adapter.VoiceAdapter;
 import com.realpower.petitionwatch.modelwatch.bean.VoiceBean;
@@ -50,15 +52,15 @@ public class PetitionDetailActivity extends BaseActivity {
     CustomGridVeiw gv_pic;
 
     @ViewById(R.id.lv_video)
-    CustomListView lv_video;
+    CustomGridVeiw lv_video;
 
     @ViewById(R.id.lv_voice)
     CustomListView lv_voice;
     private PicAdapter picAdapter;
-    private List<String> picData;
+    private ArrayList<LocalMedia> picData;
     private VoiceAdapter voiceAdapter;
-    private List<VoiceBean> voiceData;
-    private List<String> videoData;
+    private List<MyLocalMedia> voiceData;
+    private ArrayList<LocalMedia> videoData;
     private VideoAdapter videoAdapter;
     @ViewById
     AppCompatButton btn_acount, btn_add;
@@ -93,7 +95,13 @@ public class PetitionDetailActivity extends BaseActivity {
         lv_video.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                VideoPlayActivity_.intent(PetitionDetailActivity.this).path(videoData.get(position)).start();
+                VideoPlayActivity_.intent(PetitionDetailActivity.this).path(videoData.get(position).getPath()).start();
+            }
+        });
+        gv_pic.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ImageVideoActivity_.intent(PetitionDetailActivity.this).position(position).mediaList(picData).start();
             }
         });
         picAdapter.isDetail = true;
@@ -107,7 +115,13 @@ public class PetitionDetailActivity extends BaseActivity {
         call.enqueue(new MyCallback<PetitionDetailResult>() {
             @Override
             public void onSuccessRequest(PetitionDetailResult result) {
-                setData(result.getMessage());
+                if ("1".equals(result.getStatus())) {
+
+                    setData(result.getMessage());
+                } else {
+                    MyToastUtils.showToast("系统出错");
+                    finish();
+                }
             }
 
             @Override
@@ -138,7 +152,10 @@ public class PetitionDetailActivity extends BaseActivity {
         } else {
             String[] path = message.getAppealImageUrl().split(",");
             for (int i = 0; i < path.length; i++) {
-                picData.add(Mate.PIC_PATH + path[i]);
+                LocalMedia media = new LocalMedia();
+                media.setPath(Mate.PIC_PATH + path[i]);
+                media.setMimeType(1);
+                picData.add(media);
             }
             picAdapter.notifyDataSetChanged();
         }
@@ -148,7 +165,10 @@ public class PetitionDetailActivity extends BaseActivity {
         } else {
             String[] path = message.getAppealVideoUrl().split(",");
             for (int i = 0; i < path.length; i++) {
-                videoData.add(Mate.PIC_PATH + path[i]);
+                LocalMedia media = new LocalMedia();
+                media.setPath(Mate.PIC_PATH + path[i]);
+                media.setMimeType(2);
+                videoData.add(media);
             }
             videoAdapter.notifyDataSetChanged();
         }
@@ -161,7 +181,7 @@ public class PetitionDetailActivity extends BaseActivity {
             for (int i = 0; i < path.length; i++) {
                 VoiceBean bean = new VoiceBean();
                 bean.setPath(Mate.PIC_PATH + path[i]);
-                voiceData.add(bean);
+                //voiceData.add(bean);
             }
             voiceAdapter.notifyDataSetChanged();
         }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cf5f5f5"
+    android:orientation="vertical"
+    tools:context="com.realpower.petitionwatch.activity.CamerasActivity">
+
+    <include layout="@layout/activitytitle_common" />
+
+
+    <ListView
+        android:id="@+id/lv_camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:divider="@color/cf5f5f5"
+        android:dividerHeight="10dp" />
+</LinearLayout>
